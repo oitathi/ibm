@@ -6,8 +6,8 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
-import br.com.volks.rota2030.dto.ItemDeSegurancaRequestDto;
-import br.com.volks.rota2030.dto.ItemDeSegurancaResponseDto;
+import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
+import br.com.volks.rota2030.form.ItemDeSegurancaForm;
 
 public class ItemDeSegurancaJsonFactory {
 	
@@ -35,15 +35,15 @@ public class ItemDeSegurancaJsonFactory {
 	}
 	
 	public static String mockaListaJsonResponseDto() {
-		List<ItemDeSegurancaResponseDto> lista = Arrays.asList(new ItemDeSegurancaResponseDto(1L, "item de seguranca x", "norma x", "Grupo A ", "Automovel", false));
+		List<ItemDeSegurancaDto> lista = Arrays.asList(new ItemDeSegurancaDto(1L, "item de seguranca x", "norma x", "Grupo A ", "Automovel", false));
 		return gson.toJson(lista);
 	}
 	
-	public static ItemDeSegurancaRequestDto mockaRequestDto() {
-		return new ItemDeSegurancaRequestDto("item de seguranaca x", "norma x", "Grupo A" , "Automovel", false, "tester");
+	public static ItemDeSegurancaForm mockaRequestDto() {
+		return new ItemDeSegurancaForm("item de seguranaca x", "norma x", "Grupo A" , "Automovel", false, "tester");
 	}
 	
-	public static ItemDeSegurancaResponseDto mockaResponseDto() {
-		return new ItemDeSegurancaResponseDto(1L, "item de seguranca x", "norma x", "Grupo A ", "Automovel", false);
+	public static ItemDeSegurancaDto mockaResponseDto() {
+		return new ItemDeSegurancaDto(1L, "item de seguranca x", "norma x", "Grupo A ", "Automovel", false);
 	}
 }

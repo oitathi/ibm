@@ -3,8 +3,8 @@ package br.com.volks.rota2030.component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.volks.rota2030.dto.ItemDeSegurancaRequestDto;
-import br.com.volks.rota2030.dto.ItemDeSegurancaResponseDto;
+import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
+import br.com.volks.rota2030.form.ItemDeSegurancaForm;
 import br.com.volks.rota2030.model.Grupo;
 import br.com.volks.rota2030.model.ItemDeSeguranca;
 import br.com.volks.rota2030.model.Tipo;
@@ -21,14 +21,14 @@ public class ItemDeSegurancaComponent {
 	private TipoService tipoService;
 	
 	
-	public ItemDeSeguranca toEntity(ItemDeSegurancaRequestDto dto) {
+	public ItemDeSeguranca toEntity(ItemDeSegurancaForm dto) {
 		Grupo grupoEntity = grupoService.buscaPorDescricao(dto.getGrupo());
 		Tipo tipoEntity = tipoService.buscaPorDescricao(dto.getTipo());
 
 		return new ItemDeSeguranca(dto.getDescricao(), dto.getNorma(), dto.isObrigatorio(), grupoEntity, tipoEntity);
 	}
 	
-	public ItemDeSeguranca toEntity(ItemDeSegurancaResponseDto dto) {
+	public ItemDeSeguranca toEntity(ItemDeSegurancaDto dto) {
 		Grupo grupoEntity = grupoService.buscaPorDescricao(dto.getGrupo());
 		Tipo tipoEntity = tipoService.buscaPorDescricao(dto.getTipo());
 

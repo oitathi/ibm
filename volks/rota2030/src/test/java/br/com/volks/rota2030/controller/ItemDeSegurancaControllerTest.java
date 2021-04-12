@@ -27,8 +27,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import br.com.volks.rota2030.dto.ItemDeSegurancaRequestDto;
-import br.com.volks.rota2030.dto.ItemDeSegurancaResponseDto;
+import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
+import br.com.volks.rota2030.form.ItemDeSegurancaForm;
 import br.com.volks.rota2030.main.ItemDeSegurancaJsonFactory;
 import br.com.volks.rota2030.service.ItemDeSegurancaService;
 
@@ -44,17 +44,17 @@ public class ItemDeSegurancaControllerTest {
 	@Mock
 	private ItemDeSegurancaService service;
 
-	private Page<ItemDeSegurancaResponseDto> mockaPageResponse() {
-		List<ItemDeSegurancaResponseDto> listResult = Arrays.asList(mockaResponseDto());
+	private Page<ItemDeSegurancaDto> mockaPageResponse() {
+		List<ItemDeSegurancaDto> listResult = Arrays.asList(mockaResponseDto());
 
 		Pageable page = PageRequest.of(0, 1, Sort.by("id"));
-		Page<ItemDeSegurancaResponseDto> resultPaged = new PageImpl<ItemDeSegurancaResponseDto>(listResult, page,listResult.size());
+		Page<ItemDeSegurancaDto> resultPaged = new PageImpl<ItemDeSegurancaDto>(listResult, page,listResult.size());
 
 		return resultPaged;
 	}
 	
-	private ItemDeSegurancaResponseDto mockaResponseDto() {
-		return new ItemDeSegurancaResponseDto(1L, "descricao", "norma", "grupo", "tipo", true);
+	private ItemDeSegurancaDto mockaResponseDto() {
+		return new ItemDeSegurancaDto(1L, "descricao", "norma", "grupo", "tipo", true);
 	}
 
 	@Before
@@ -75,7 +75,7 @@ public class ItemDeSegurancaControllerTest {
 	
 	@Test
 	public void deveSalvarUmNovoItem() throws Exception {
-		Mockito.when(service.salvaItem(Mockito.<ItemDeSegurancaRequestDto>any())).thenReturn(mockaResponseDto());
+		Mockito.when(service.salvaItem(Mockito.<ItemDeSegurancaForm>any())).thenReturn(mockaResponseDto());
 		
 		mockMvc.perform(post("/item-de-seguranca/novo-item")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -86,7 +86,7 @@ public class ItemDeSegurancaControllerTest {
 	
 	@Test
 	public void deveEditarUmItem() throws Exception {
-		Mockito.when(service.editaItem(Mockito.<ItemDeSegurancaResponseDto>any())).thenReturn(mockaResponseDto());
+		Mockito.when(service.editaItem(Mockito.<ItemDeSegurancaDto>any())).thenReturn(mockaResponseDto());
 		
 		mockMvc.perform(put("/item-de-seguranca/edita-item/1")
 				.contentType(MediaType.APPLICATION_JSON)

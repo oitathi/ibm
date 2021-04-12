@@ -27,14 +27,14 @@ import org.springframework.data.domain.Sort;
 import com.google.gson.Gson;
 
 import br.com.volks.rota2030.component.ItemDeSegurancaComponent;
-import br.com.volks.rota2030.dto.ItemDeSegurancaRequestDto;
-import br.com.volks.rota2030.dto.ItemDeSegurancaResponseDto;
+import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
 import br.com.volks.rota2030.enums.AcoesEnum;
 import br.com.volks.rota2030.enums.TabelasEnum;
 import br.com.volks.rota2030.exceptions.ItemDeSeguracaUpdateException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotDeletedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotSalvedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaSearchException;
+import br.com.volks.rota2030.form.ItemDeSegurancaForm;
 import br.com.volks.rota2030.model.Grupo;
 import br.com.volks.rota2030.model.ItemDeSeguranca;
 import br.com.volks.rota2030.model.Logs;
@@ -65,12 +65,12 @@ public class ItemDeSegurancaServiceTest {
 		
 	
 	
-	private ItemDeSegurancaRequestDto mockaRequestDto() {
-		return new ItemDeSegurancaRequestDto("item de seguranaca x", "norma x", "Grupo A" , "Automovel", false, "tester");
+	private ItemDeSegurancaForm mockaRequestDto() {
+		return new ItemDeSegurancaForm("item de seguranaca x", "norma x", "Grupo A" , "Automovel", false, "tester");
 	}
 	
-	private ItemDeSegurancaResponseDto mockaResponseDto() {
-		return new ItemDeSegurancaResponseDto(1L, "item de seguranca x", "norma x", "Grupo A ", "Automovel", false);
+	private ItemDeSegurancaDto mockaResponseDto() {
+		return new ItemDeSegurancaDto(1L, "item de seguranca x", "norma x", "Grupo A ", "Automovel", false);
 	}
 	
 	private Grupo mockaGrupo() {
@@ -93,18 +93,18 @@ public class ItemDeSegurancaServiceTest {
 	@Order(1)
 	@Test
 	public void deveSalvarUmItem() {
-		Mockito.when(itemSegurancaComponent.toEntity(Mockito.<ItemDeSegurancaRequestDto>any())).thenReturn(mockaItemDeSeguranca());
+		Mockito.when(itemSegurancaComponent.toEntity(Mockito.<ItemDeSegurancaForm>any())).thenReturn(mockaItemDeSeguranca());
 		Mockito.when(itemSegurancarepository.save(Mockito.<ItemDeSeguranca>any())).thenReturn(mockaItemDeSeguranca());
 		Mockito.when(logsRepository.save(Mockito.<Logs>any())).thenReturn(mockaLogs());
 		
-		ItemDeSegurancaResponseDto actual = itemDeSegurancaService.salvaItem(mockaRequestDto());
+		ItemDeSegurancaDto actual = itemDeSegurancaService.salvaItem(mockaRequestDto());
 		assertEquals(1L, actual.getId());
 	}
 	
 	@Order(2)
 	@Test(expected = ItemDeSegurancaNotSalvedException.class)
 	public void deveLancarExcecaoAoSalvarUmItem() {
-		Mockito.when(itemSegurancaComponent.toEntity(Mockito.<ItemDeSegurancaRequestDto>any())).thenThrow(NullPointerException.class);
+		Mockito.when(itemSegurancaComponent.toEntity(Mockito.<ItemDeSegurancaForm>any())).thenThrow(NullPointerException.class);
 		itemDeSegurancaService.salvaItem(mockaRequestDto());
 	}
 	
@@ -124,7 +124,7 @@ public class ItemDeSegurancaServiceTest {
 				Mockito.anyString()))
 		.thenReturn(resultPaged);
 		
-		Page<ItemDeSegurancaResponseDto> actual = itemDeSegurancaService.buscaDinamica(filtro, 1, 1, "id");
+		Page<ItemDeSegurancaDto> actual = itemDeSegurancaService.buscaDinamica(filtro, 1, 1, "id");
 		assertEquals(1, actual.getNumberOfElements());
 	}
 	
@@ -146,7 +146,7 @@ public class ItemDeSegurancaServiceTest {
 	@Test
 	public void deveBuscarPorId() {
 		Mockito.when(itemSegurancarepository.findByIdFullLoad(1L)).thenReturn(mockaItemDeSeguranca());
-		ItemDeSegurancaResponseDto actual = itemDeSegurancaService.buscaPorId(1L);
+		ItemDeSegurancaDto actual = itemDeSegurancaService.buscaPorId(1L);
 		assertEquals("Automovel", actual.getTipo());
 	}
 	
@@ -169,8 +169,8 @@ public class ItemDeSegurancaServiceTest {
 				Mockito.<String>any()))
 		.thenReturn(1);
 		
-		ItemDeSegurancaResponseDto dto = mockaResponseDto();
-		ItemDeSegurancaResponseDto actual = itemDeSegurancaService.editaItem(dto);
+		ItemDeSegurancaDto dto = mockaResponseDto();
+		ItemDeSegurancaDto actual = itemDeSegurancaService.editaItem(dto);
 		
 		assertEquals("Automovel", actual.getTipo());
 	}

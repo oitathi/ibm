@@ -13,6 +13,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.volks.rota2030.form.ItemDeSegurancaForm;
+
 
 public class ItemDeSegurancaRequestDtoTest {
 
@@ -26,7 +28,7 @@ public class ItemDeSegurancaRequestDtoTest {
 	
 	@Test
 	public void deveRetornarItemDeSegurancaValido() {
-		ItemDeSegurancaRequestDto dto = new ItemDeSegurancaRequestDto();
+		ItemDeSegurancaForm dto = new ItemDeSegurancaForm();
 		dto.setDescricao("descricao");
 		dto.setNorma("norma");
 		dto.setGrupo("GRUPO_A");
@@ -34,13 +36,13 @@ public class ItemDeSegurancaRequestDtoTest {
 		dto.setObrigatorio(true);
 		dto.setUsuario("usuario");
 		
-		Set<ConstraintViolation<ItemDeSegurancaRequestDto>> violations = validator.validate(dto);
+		Set<ConstraintViolation<ItemDeSegurancaForm>> violations = validator.validate(dto);
         Assert.assertTrue(violations.isEmpty());
 	}
 	
 	@Test
 	public void deveRetornarItemDeSegurancaInvalido() {
-		ItemDeSegurancaRequestDto dto = new ItemDeSegurancaRequestDto();
+		ItemDeSegurancaForm dto = new ItemDeSegurancaForm();
 		dto.setDescricao("");
 		dto.setNorma("");
 		dto.setGrupo("");
@@ -48,13 +50,13 @@ public class ItemDeSegurancaRequestDtoTest {
 		dto.setObrigatorio(true);
 		dto.setUsuario("");
 		
-		Set<ConstraintViolation<ItemDeSegurancaRequestDto>> violations = validator.validate(dto);
+		Set<ConstraintViolation<ItemDeSegurancaForm>> violations = validator.validate(dto);
         Assert.assertEquals(5, violations.size());
 	}
 	
 	@Test
 	public void loadClass() {
-		ItemDeSegurancaRequestDto dto = new ItemDeSegurancaRequestDto("Item X", "Norma Alfa", "Grupo C", "Caminhonete",  false, "tester");
+		ItemDeSegurancaForm dto = new ItemDeSegurancaForm("Item X", "Norma Alfa", "Grupo C", "Caminhonete",  false, "tester");
 		assertNotNull(dto.getDescricao());
 		assertNotNull(dto.getNorma());
 		assertNotNull(dto.getGrupo());

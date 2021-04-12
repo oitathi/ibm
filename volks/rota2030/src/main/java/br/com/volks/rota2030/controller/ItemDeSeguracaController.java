@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.volks.rota2030.dto.ItemDeSegurancaRequestDto;
-import br.com.volks.rota2030.dto.ItemDeSegurancaResponseDto;
+import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
+import br.com.volks.rota2030.form.ItemDeSegurancaForm;
 import br.com.volks.rota2030.service.ItemDeSegurancaService;
 
 @RestController 
@@ -30,7 +30,7 @@ public class ItemDeSeguracaController {
 	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(path = "/lista-itens", produces = "application/json")
-	public Page<ItemDeSegurancaResponseDto> listaTodos(
+	public Page<ItemDeSegurancaDto> listaTodos(
 			 @RequestParam (required = false) Map<String,String> filtro,
 			 @RequestParam(defaultValue = "0") int pageNo, 
              @RequestParam(defaultValue = "10") int pageSize,
@@ -41,19 +41,19 @@ public class ItemDeSeguracaController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(path = "/novo-item", consumes = "application/json", produces = "application/json")
-	public ItemDeSegurancaResponseDto novoItemDeSeguranca(@RequestBody ItemDeSegurancaRequestDto novoItem) {
+	public ItemDeSegurancaDto novoItemDeSeguranca(@RequestBody ItemDeSegurancaForm novoItem) {
 		return service.salvaItem(novoItem);
 	}
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PutMapping(path ="/edita-item/{id}",consumes = "application/json", produces = "application/json")
-	public ItemDeSegurancaResponseDto editaItem(@RequestBody ItemDeSegurancaResponseDto itemEditado)  {
+	public ItemDeSegurancaDto editaItem(@RequestBody ItemDeSegurancaDto itemEditado)  {
 		return service.editaItem(itemEditado);
 	}
 	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(path = "/lista-itens/{id}", produces = "application/json")
-	public ItemDeSegurancaResponseDto buscaPorId(@PathVariable Long id) {
+	public ItemDeSegurancaDto buscaPorId(@PathVariable Long id) {
 		return service.buscaPorId(id);
 		
 	}
@@ -66,7 +66,7 @@ public class ItemDeSeguracaController {
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PostMapping(path= "/download-relatorio", produces = "application/json")
-	public long donwloadRelatorio(@RequestBody List<ItemDeSegurancaResponseDto> itensDto) {
+	public long donwloadRelatorio(@RequestBody List<ItemDeSegurancaDto> itensDto) {
 		return service.criaTokenDeAcompanhamento(itensDto);
 	}
 	

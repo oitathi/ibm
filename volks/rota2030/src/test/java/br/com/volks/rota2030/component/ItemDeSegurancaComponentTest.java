@@ -11,8 +11,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import br.com.volks.rota2030.dto.ItemDeSegurancaRequestDto;
-import br.com.volks.rota2030.dto.ItemDeSegurancaResponseDto;
+import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
+import br.com.volks.rota2030.form.ItemDeSegurancaForm;
 import br.com.volks.rota2030.model.Grupo;
 import br.com.volks.rota2030.model.ItemDeSeguranca;
 import br.com.volks.rota2030.model.Tipo;
@@ -33,12 +33,12 @@ public class ItemDeSegurancaComponentTest {
 	private TipoService tipoService;
 	
 	
-	private ItemDeSegurancaRequestDto mockaRequestDto() {
-		return new ItemDeSegurancaRequestDto("item de seguranca x", "norma x", "Grupo A" , "Automovel", false, "tester");
+	private ItemDeSegurancaForm mockaRequestDto() {
+		return new ItemDeSegurancaForm("item de seguranca x", "norma x", "Grupo A" , "Automovel", false, "tester");
 	}
 	
-	private ItemDeSegurancaResponseDto mockaResponseDto() {
-		return new ItemDeSegurancaResponseDto(1L, "item de seguranca x", "norma x", "Grupo A ", "Automovel", false);
+	private ItemDeSegurancaDto mockaResponseDto() {
+		return new ItemDeSegurancaDto(1L, "item de seguranca x", "norma x", "Grupo A ", "Automovel", false);
 	}
 	
 	private Grupo mockaGrupo() {

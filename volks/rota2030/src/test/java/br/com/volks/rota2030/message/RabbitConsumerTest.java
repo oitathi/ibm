@@ -31,7 +31,7 @@ public class RabbitConsumerTest {
 		verify(service, times(1)).receiveFromConsumer(1L);
 	}
 	
-	@Test(expected = AmqpRejectAndDontRequeueException.class)
+	@Test(expected = RabbitException.class)
 	public void deveLancarExcecaoAoConsumirMensagem() {
 		doThrow(new NullPointerException()).when(service).receiveFromConsumer(Mockito.anyLong());
 		consumer.consume(1L);

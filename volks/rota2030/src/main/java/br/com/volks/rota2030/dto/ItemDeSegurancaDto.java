@@ -1,6 +1,6 @@
 package br.com.volks.rota2030.dto;
 
-public class ItemDeSegurancaResponseDto {
+public class ItemDeSegurancaDto {
 	
 	private long id;
 	private String descricao;
@@ -11,12 +11,12 @@ public class ItemDeSegurancaResponseDto {
 	private boolean obrigatorio;
 	
 	
-	public ItemDeSegurancaResponseDto() {
+	public ItemDeSegurancaDto() {
 		
 	}
 	
 	
-	public ItemDeSegurancaResponseDto(long id, String descricao, String norma, String grupo, String tipo,	boolean obrigatorio) {
+	public ItemDeSegurancaDto(long id, String descricao, String norma, String grupo, String tipo,	boolean obrigatorio) {
 		this.id = id;
 		this.descricao = descricao;
 		this.norma = norma;
@@ -27,7 +27,7 @@ public class ItemDeSegurancaResponseDto {
 
 
 
-	public ItemDeSegurancaResponseDto(long id, String descricao, String norma, String grupo, String tipo, boolean obrigatorio, String usuario) {
+	public ItemDeSegurancaDto(long id, String descricao, String norma, String grupo, String tipo, boolean obrigatorio, String usuario) {
 		this.id = id;
 		this.descricao = descricao;
 		this.norma = norma;

@@ -1,11 +1,11 @@
-package br.com.volks.rota2030.dto;
+package br.com.volks.rota2030.form;
 
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class ItemDeSegurancaRequestDto {
+public class ItemDeSegurancaForm {
 
 	@JsonProperty("descricao")
 	@NotBlank(message = "Descricao eh obrigatoria")
@@ -30,11 +30,11 @@ public class ItemDeSegurancaRequestDto {
 	@NotBlank(message = "Usuario eh obrigatorio")
 	private String usuario;
 	
-	public ItemDeSegurancaRequestDto() {
+	public ItemDeSegurancaForm() {
 		
 	}
 
-	public ItemDeSegurancaRequestDto(String descricao, String norma, String grupo, String tipo, boolean obrigatorio, String usuario) {
+	public ItemDeSegurancaForm(String descricao, String norma, String grupo, String tipo, boolean obrigatorio, String usuario) {
 		this.descricao = descricao;
 		this.norma = norma;
 		this.grupo = grupo;

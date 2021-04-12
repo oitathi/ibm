@@ -7,18 +7,18 @@ import java.util.List;
 
 import org.junit.Test;
 
-import br.com.volks.rota2030.dto.ItemDeSegurancaResponseDto;
+import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
 import br.com.volks.rota2030.exceptions.ToCsvException;
 
 public class StringOperationsTest {
 	
 	
 	
-	private List<ItemDeSegurancaResponseDto> mockaListaItemDeSegurancaResponseDto(){
-		List<ItemDeSegurancaResponseDto> lista = new ArrayList<ItemDeSegurancaResponseDto>();
+	private List<ItemDeSegurancaDto> mockaListaItemDeSegurancaResponseDto(){
+		List<ItemDeSegurancaDto> lista = new ArrayList<ItemDeSegurancaDto>();
 		
-		lista.add(new ItemDeSegurancaResponseDto(1L, "item w", "norma w", "grupo a", "caminhonete", true));
-		lista.add(new ItemDeSegurancaResponseDto(2L, "item x", "norma x", "grupo b", "automovel", false));
+		lista.add(new ItemDeSegurancaDto(1L, "item w", "norma w", "grupo a", "caminhonete", true));
+		lista.add(new ItemDeSegurancaDto(2L, "item x", "norma x", "grupo b", "automovel", false));
 		
 		return lista;
 	}
@@ -63,7 +63,7 @@ public class StringOperationsTest {
 	
 	@Test(expected = ToCsvException.class)
 	public void deveLancarExcecaoAoEntarCoverterLista() {
-		List<ItemDeSegurancaResponseDto> lista = mockaListaItemDeSegurancaResponseDto();
+		List<ItemDeSegurancaDto> lista = mockaListaItemDeSegurancaResponseDto();
 		lista.add(null);
 		
 		StringOperations.listToCsv(lista);

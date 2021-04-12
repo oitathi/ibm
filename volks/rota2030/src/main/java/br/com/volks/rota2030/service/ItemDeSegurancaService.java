@@ -14,8 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.volks.rota2030.component.ItemDeSegurancaComponent;
-import br.com.volks.rota2030.dto.ItemDeSegurancaRequestDto;
-import br.com.volks.rota2030.dto.ItemDeSegurancaResponseDto;
+import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
 import br.com.volks.rota2030.enums.AcoesEnum;
 import br.com.volks.rota2030.enums.StatusRelatorioEnum;
 import br.com.volks.rota2030.enums.TabelasEnum;
@@ -23,6 +22,7 @@ import br.com.volks.rota2030.exceptions.ItemDeSeguracaUpdateException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotDeletedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotSalvedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaSearchException;
+import br.com.volks.rota2030.form.ItemDeSegurancaForm;
 import br.com.volks.rota2030.model.ItemDeSeguranca;
 import br.com.volks.rota2030.model.Logs;
 import br.com.volks.rota2030.model.Relatorio;
@@ -48,7 +48,7 @@ public class ItemDeSegurancaService {
 	
 	
 	
-	public ItemDeSegurancaResponseDto salvaItem(ItemDeSegurancaRequestDto itemDto) {
+	public ItemDeSegurancaDto salvaItem(ItemDeSegurancaForm itemDto) {
 		try {
 			ItemDeSeguranca itemSeg =  itemSegurancaComponent.toEntity(itemDto);
 			itemSeg = itemSegurancarepository.save(itemSeg);
@@ -64,15 +64,15 @@ public class ItemDeSegurancaService {
 	}
 	
 	
-	public Page<ItemDeSegurancaResponseDto> buscaDinamica(Map<String, String> filtro,  int pageNo, int pageSize, String sortBy){
+	public Page<ItemDeSegurancaDto> buscaDinamica(Map<String, String> filtro,  int pageNo, int pageSize, String sortBy){
 		try {
-			List<ItemDeSegurancaResponseDto> itensDto = new ArrayList<ItemDeSegurancaResponseDto>();
+			List<ItemDeSegurancaDto> itensDto = new ArrayList<ItemDeSegurancaDto>();
 			
 			Page<ItemDeSeguranca> entitiesList = itemSegurancarepository.buscaPorFiltros(filtro, pageNo, pageSize, sortBy);
 			entitiesList.forEach(entity -> itensDto.add(entity.toResponseDto()));
 			
 			Pageable page = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-			Page<ItemDeSegurancaResponseDto> resultPaged = new PageImpl<ItemDeSegurancaResponseDto>(itensDto, page, itensDto.size());
+			Page<ItemDeSegurancaDto> resultPaged = new PageImpl<ItemDeSegurancaDto>(itensDto, page, itensDto.size());
 					
 			return resultPaged; 
 			
@@ -81,7 +81,7 @@ public class ItemDeSegurancaService {
 		}
 	}
 	
-	public ItemDeSegurancaResponseDto buscaPorId(Long id) {
+	public ItemDeSegurancaDto buscaPorId(Long id) {
 		try {
 		  ItemDeSeguranca iseg = itemSegurancarepository.findByIdFullLoad(id);
 		  return iseg.toResponseDto();
@@ -92,7 +92,7 @@ public class ItemDeSegurancaService {
 	}
 
 		
-	public ItemDeSegurancaResponseDto editaItem(ItemDeSegurancaResponseDto dto) {
+	public ItemDeSegurancaDto editaItem(ItemDeSegurancaDto dto) {
 		try {
 				itemSegurancarepository.update(dto.getId(),dto.getDescricao(),dto.getNorma(),dto.isObrigatorio(), dto.getGrupo(), dto.getTipo());
 				Logs log = new Logs(dto.getUsuario(), AcoesEnum.EDITAR, TabelasEnum.ITEM_DE_SEGURANCA, dto.getId(), dto.toString(), new Date());
@@ -113,7 +113,7 @@ public class ItemDeSegurancaService {
 		}
 	}
 	
-	public long criaTokenDeAcompanhamento(List<ItemDeSegurancaResponseDto> itens) {
+	public long criaTokenDeAcompanhamento(List<ItemDeSegurancaDto> itens) {
 		Relatorio relatorio = new Relatorio(StatusRelatorioEnum.CRIADO, StringOperations.listToCsv(itens), new Date());
 		relatorio = relatorioRepository.save(relatorio);
 		

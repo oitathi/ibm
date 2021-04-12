@@ -12,7 +12,7 @@ import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 
-import br.com.volks.rota2030.dto.ItemDeSegurancaResponseDto;
+import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
 
 @NamedEntityGraph(name = "item-com-grupo-e-tipo", 
 attributeNodes = { @NamedAttributeNode("grupo"),
@@ -97,8 +97,8 @@ public class ItemDeSeguranca {
 				+ isObrigatorio + ", grupo=" + grupo.getDescricao() + ", tipo=" + tipo.getDescricao() + "]";
 	}
 
-	public ItemDeSegurancaResponseDto toResponseDto() {
-		return new ItemDeSegurancaResponseDto(id, descricao, norma, grupo.getDescricao(), tipo.getDescricao(),
+	public ItemDeSegurancaDto toResponseDto() {
+		return new ItemDeSegurancaDto(id, descricao, norma, grupo.getDescricao(), tipo.getDescricao(),
 				isObrigatorio);
 	}
 
