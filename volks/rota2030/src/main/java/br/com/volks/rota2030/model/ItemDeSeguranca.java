@@ -97,7 +97,7 @@ public class ItemDeSeguranca {
 				+ isObrigatorio + ", grupo=" + grupo.getDescricao() + ", tipo=" + tipo.getDescricao() + "]";
 	}
 
-	public ItemDeSegurancaDto toResponseDto() {
+	public ItemDeSegurancaDto toDto() {
 		return new ItemDeSegurancaDto(id, descricao, norma, grupo.getDescricao(), tipo.getDescricao(),
 				isObrigatorio);
 	}

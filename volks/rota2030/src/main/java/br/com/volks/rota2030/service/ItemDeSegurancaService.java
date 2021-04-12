@@ -48,15 +48,15 @@ public class ItemDeSegurancaService {
 	
 	
 	
-	public ItemDeSegurancaDto salvaItem(ItemDeSegurancaForm itemDto) {
+	public ItemDeSegurancaDto salvaItem(ItemDeSegurancaForm form) {
 		try {
-			ItemDeSeguranca itemSeg =  itemSegurancaComponent.toEntity(itemDto);
+			ItemDeSeguranca itemSeg =  itemSegurancaComponent.toEntity(form);
 			itemSeg = itemSegurancarepository.save(itemSeg);
-			Logs log = new Logs(itemDto.getUsuario(), AcoesEnum.CRIAR, TabelasEnum.ITEM_DE_SEGURANCA, itemSeg.getId(), itemSeg.toString(), new Date());
+			Logs log = new Logs(form.getUsuario(), AcoesEnum.CRIAR, TabelasEnum.ITEM_DE_SEGURANCA, itemSeg.getId(), itemSeg.toString(), new Date());
 			
 			logsRepository.save(log);
 						
-			return itemSeg.toResponseDto();	
+			return itemSeg.toDto();	
 			
 		}catch (Exception e) {
 			throw new ItemDeSegurancaNotSalvedException(e);
@@ -69,7 +69,7 @@ public class ItemDeSegurancaService {
 			List<ItemDeSegurancaDto> itensDto = new ArrayList<ItemDeSegurancaDto>();
 			
 			Page<ItemDeSeguranca> entitiesList = itemSegurancarepository.buscaPorFiltros(filtro, pageNo, pageSize, sortBy);
-			entitiesList.forEach(entity -> itensDto.add(entity.toResponseDto()));
+			entitiesList.forEach(entity -> itensDto.add(entity.toDto()));
 			
 			Pageable page = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
 			Page<ItemDeSegurancaDto> resultPaged = new PageImpl<ItemDeSegurancaDto>(itensDto, page, itensDto.size());
@@ -84,7 +84,7 @@ public class ItemDeSegurancaService {
 	public ItemDeSegurancaDto buscaPorId(Long id) {
 		try {
 		  ItemDeSeguranca iseg = itemSegurancarepository.findByIdFullLoad(id);
-		  return iseg.toResponseDto();
+		  return iseg.toDto();
 		}catch (Exception e) {
 			throw new ItemDeSegurancaSearchException(e);
 		}
