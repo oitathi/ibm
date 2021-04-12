@@ -13,9 +13,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.volks.rota2030.dto.ItemDeSegurancaRequestDto;
-import br.com.volks.rota2030.model.ItemDeSeguranca;
-
 
 public class ItemDeSegurancaRequestDtoTest {
 
