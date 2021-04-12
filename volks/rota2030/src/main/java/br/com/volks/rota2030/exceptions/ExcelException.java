@@ -12,5 +12,10 @@ public class ExcelException extends RuntimeException {
 		super("Erro ao criar arquivo Excel: " + ExceptionUtils.getStackTrace(e));
 		logger.error("Erro ao criar arquivo Excel: " + ExceptionUtils.getStackTrace(e));
 	}
+	
+	public ExcelException(long token) {
+		super("Erro ao criar arquivo Excel: Token nao encontrado");
+		logger.error("Erro ao criar arquivo Excel: Token nao encontrado");
+	}
 
 }

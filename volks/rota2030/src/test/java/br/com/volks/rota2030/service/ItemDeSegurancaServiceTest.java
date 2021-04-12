@@ -38,6 +38,7 @@ import br.com.volks.rota2030.exceptions.ItemDeSegurancaSearchException;
 import br.com.volks.rota2030.model.Grupo;
 import br.com.volks.rota2030.model.ItemDeSeguranca;
 import br.com.volks.rota2030.model.Logs;
+import br.com.volks.rota2030.model.Relatorio;
 import br.com.volks.rota2030.model.Tipo;
 import br.com.volks.rota2030.repository.ItemDeSegurancaRepository;
 import br.com.volks.rota2030.repository.LogsRepository;
@@ -204,6 +205,14 @@ public class ItemDeSegurancaServiceTest {
 		Mockito.doThrow(new NullPointerException()).when(itemSegurancarepository).deleteById(Mockito.anyLong());
 		itemDeSegurancaService.deletaItem(1L, "tester");
 		
+	}
+	
+	@Order(11)
+	@Test
+	public void deveCriarTokenDeAcompanhamanto() {
+		Mockito.when(relatorioRepository.save(Mockito.<Relatorio>any())).thenReturn(new Relatorio(1L));
+		long actual = itemDeSegurancaService.criaTokenDeAcompanhamento(Arrays.asList(mockaResponseDto()));
+		assertTrue(actual > 0);
 	}
 	
 }

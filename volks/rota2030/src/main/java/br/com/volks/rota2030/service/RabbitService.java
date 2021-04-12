@@ -12,7 +12,7 @@ import br.com.volks.rota2030.model.Relatorio;
 import br.com.volks.rota2030.repository.RelatorioRepository;
 
 @Service
-public class RabbitService {
+public class RabbitService { 
 
 	@Autowired
 	private RabbitProducer rabbit;
@@ -20,6 +20,8 @@ public class RabbitService {
 	@Autowired
 	private RelatorioRepository relatorioRepository;
 
+	@Autowired
+	private ExcelWritter excelWritter;
 	
 	public boolean sendToConsumerSuccess(long token) {
 		rabbit.producer(token);
@@ -29,7 +31,7 @@ public class RabbitService {
 
 	public void receiveFromConsumer(long token) {
 		atualizaStatusRelatorio(token, StatusRelatorioEnum.PROCESSANDO, false);
-		new ExcelWritter(token);
+		excelWritter.criaArquivo(token);
 		atualizaStatusRelatorio(token, StatusRelatorioEnum.DISPONIVEL, true);
 	}
 
@@ -42,7 +44,7 @@ public class RabbitService {
 
 			if (jaProcessdo) {
 				relatorio.setConteudo("");
-			}
+			} 
 
 			relatorioRepository.save(relatorio);
 		}

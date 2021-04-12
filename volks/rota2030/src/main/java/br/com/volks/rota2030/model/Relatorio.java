@@ -45,8 +45,12 @@ public class Relatorio {
 		this.conteudo = conteudo;
 		this.dataCriacao = dataCriacao;
 	}
+	
+	public Relatorio(long id) {
+		this.id = id;
+	}
 
-
+	
 
 
 	public Long getId() {

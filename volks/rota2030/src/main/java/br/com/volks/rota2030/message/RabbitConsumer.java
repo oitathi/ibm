@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import br.com.volks.rota2030.exceptions.RabbitException;
 import br.com.volks.rota2030.service.RabbitService;
 
-@Component
-public class RabbitConsumer {
+@Component 
+public class RabbitConsumer { 
 	
 	
 	@Autowired
