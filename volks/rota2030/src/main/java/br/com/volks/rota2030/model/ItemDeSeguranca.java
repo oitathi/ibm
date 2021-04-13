@@ -36,11 +36,11 @@ public class ItemDeSeguranca {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GRUPO_ID", nullable = false)
-	private Grupo grupo;
+	private ItemDeSegurancaGrupo grupo;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TIPO_ID", nullable = false)
-	private Tipo tipo;
+	private ItemDeSegurancaTipo tipo;
 
 	@Column(name = "ITEM_DE_SEGURANCA_OBRIGATORIO")
 	private boolean isObrigatorio;
@@ -49,7 +49,7 @@ public class ItemDeSeguranca {
 
 	}
 
-	public ItemDeSeguranca(Long id, String descricao, String norma, boolean isObrigatorio, Grupo grupo, Tipo tipo) {
+	public ItemDeSeguranca(Long id, String descricao, String norma, boolean isObrigatorio, ItemDeSegurancaGrupo grupo, ItemDeSegurancaTipo tipo) {
 		this.id = id;
 		this.descricao = descricao;
 		this.norma = norma;
@@ -58,7 +58,7 @@ public class ItemDeSeguranca {
 		this.tipo = tipo;
 	}
 
-	public ItemDeSeguranca(String descricao, String norma, boolean isObrigatorio, Grupo grupo, Tipo tipo) {
+	public ItemDeSeguranca(String descricao, String norma, boolean isObrigatorio, ItemDeSegurancaGrupo grupo, ItemDeSegurancaTipo tipo) {
 
 		this.descricao = descricao;
 		this.norma = norma;
@@ -83,11 +83,11 @@ public class ItemDeSeguranca {
 		return isObrigatorio;
 	}
 
-	public Grupo getGrupo() {
+	public ItemDeSegurancaGrupo getGrupo() {
 		return grupo;
 	}
 
-	public Tipo getTipo() {
+	public ItemDeSegurancaTipo getTipo() {
 		return tipo;
 	}
 

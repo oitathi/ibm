@@ -12,8 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TIPO")
-public class Tipo {
+@Table(name = "ITEM_SEGURANCA_TIPO")
+public class ItemDeSegurancaTipo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,11 +26,11 @@ public class Tipo {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tipo")
 	private Set<ItemDeSeguranca> itensDeSeguranca;
 	
-	public Tipo() {
+	public ItemDeSegurancaTipo() {
 		
 	}
 	
-	public Tipo(Long id, String descricao) {
+	public ItemDeSegurancaTipo(Long id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
 	}

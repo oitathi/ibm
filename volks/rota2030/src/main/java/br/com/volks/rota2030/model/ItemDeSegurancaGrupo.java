@@ -12,8 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "GRUPO")
-public class Grupo {
+@Table(name = "ITEM_SEGURANCA_GRUPO")
+public class ItemDeSegurancaGrupo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +28,12 @@ public class Grupo {
 	
 	
 
-	public Grupo() {
+	public ItemDeSegurancaGrupo() {
 		
 	}
 
 
-	public Grupo(Long id, String descricao) {
+	public ItemDeSegurancaGrupo(Long id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
 	}

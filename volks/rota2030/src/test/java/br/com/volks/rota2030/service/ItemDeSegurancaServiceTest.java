@@ -30,16 +30,16 @@ import br.com.volks.rota2030.component.ItemDeSegurancaComponent;
 import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
 import br.com.volks.rota2030.enums.AcoesEnum;
 import br.com.volks.rota2030.enums.TabelasEnum;
-import br.com.volks.rota2030.exceptions.ItemDeSeguracaUpdateException;
+import br.com.volks.rota2030.exceptions.ItemDeSeguracaUpdatedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotDeletedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotSalvedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaSearchException;
 import br.com.volks.rota2030.form.ItemDeSegurancaForm;
-import br.com.volks.rota2030.model.Grupo;
+import br.com.volks.rota2030.model.ItemDeSegurancaGrupo;
 import br.com.volks.rota2030.model.ItemDeSeguranca;
 import br.com.volks.rota2030.model.Logs;
 import br.com.volks.rota2030.model.Relatorio;
-import br.com.volks.rota2030.model.Tipo;
+import br.com.volks.rota2030.model.ItemDeSegurancaTipo;
 import br.com.volks.rota2030.repository.ItemDeSegurancaRepository;
 import br.com.volks.rota2030.repository.LogsRepository;
 import br.com.volks.rota2030.repository.RelatorioRepository;
@@ -73,12 +73,12 @@ public class ItemDeSegurancaServiceTest {
 		return new ItemDeSegurancaDto(1L, "item de seguranca x", "norma x", "Grupo A ", "Automovel", false);
 	}
 	
-	private Grupo mockaGrupo() {
-		return new Grupo(1L, "Grupo A");
+	private ItemDeSegurancaGrupo mockaGrupo() {
+		return new ItemDeSegurancaGrupo(1L, "Grupo A");
 	}
 	
-	private Tipo mockaTipo() {
-		return new Tipo(1L, "Automovel");
+	private ItemDeSegurancaTipo mockaTipo() {
+		return new ItemDeSegurancaTipo(1L, "Automovel");
 	}
 	
 	private ItemDeSeguranca mockaItemDeSeguranca() {
@@ -97,7 +97,7 @@ public class ItemDeSegurancaServiceTest {
 		Mockito.when(itemSegurancarepository.save(Mockito.<ItemDeSeguranca>any())).thenReturn(mockaItemDeSeguranca());
 		Mockito.when(logsRepository.save(Mockito.<Logs>any())).thenReturn(mockaLogs());
 		
-		ItemDeSegurancaDto actual = itemDeSegurancaService.salvaItem(mockaRequestDto());
+		ItemDeSegurancaDto actual = itemDeSegurancaService.salva(mockaRequestDto());
 		assertEquals(1L, actual.getId());
 	}
 	
@@ -105,7 +105,7 @@ public class ItemDeSegurancaServiceTest {
 	@Test(expected = ItemDeSegurancaNotSalvedException.class)
 	public void deveLancarExcecaoAoSalvarUmItem() {
 		Mockito.when(itemSegurancaComponent.toEntity(Mockito.<ItemDeSegurancaForm>any())).thenThrow(NullPointerException.class);
-		itemDeSegurancaService.salvaItem(mockaRequestDto());
+		itemDeSegurancaService.salva(mockaRequestDto());
 	}
 	
 	@Order(3)
@@ -170,13 +170,13 @@ public class ItemDeSegurancaServiceTest {
 		.thenReturn(1);
 		
 		ItemDeSegurancaDto dto = mockaResponseDto();
-		ItemDeSegurancaDto actual = itemDeSegurancaService.editaItem(dto);
+		ItemDeSegurancaDto actual = itemDeSegurancaService.edita(dto);
 		
 		assertEquals("Automovel", actual.getTipo());
 	}
 	
 	@Order(8)
-	@Test(expected = ItemDeSeguracaUpdateException.class)
+	@Test(expected = ItemDeSeguracaUpdatedException.class)
 	public void deveLancarExcecaoAoEditarUmItem() {
 		Mockito.when(itemSegurancarepository.update(
 				Mockito.anyLong(),
@@ -187,14 +187,14 @@ public class ItemDeSegurancaServiceTest {
 				Mockito.<String>any()))
 		.thenThrow(NullPointerException.class);
 		
-		itemDeSegurancaService.editaItem(mockaResponseDto());
+		itemDeSegurancaService.edita(mockaResponseDto());
 	}
 	
 	@Order(9)
 	@Test
 	public void deveDeletarUmItem() {
 		Mockito.doNothing().when(itemSegurancarepository).deleteById(Mockito.anyLong());
-		boolean actual = itemDeSegurancaService.deletaItem(1L, "tester");
+		boolean actual = itemDeSegurancaService.deleta(1L, "tester");
 		
 		assertTrue(actual);
 	}
@@ -203,7 +203,7 @@ public class ItemDeSegurancaServiceTest {
 	@Test(expected = ItemDeSegurancaNotDeletedException.class)
 	public void deveLancarExcecaoAoDeletarUmItem() {
 		Mockito.doThrow(new NullPointerException()).when(itemSegurancarepository).deleteById(Mockito.anyLong());
-		itemDeSegurancaService.deletaItem(1L, "tester");
+		itemDeSegurancaService.deleta(1L, "tester");
 		
 	}
 	

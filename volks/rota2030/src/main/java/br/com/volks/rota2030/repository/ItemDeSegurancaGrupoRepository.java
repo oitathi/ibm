@@ -8,10 +8,10 @@ import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 import com.sun.xml.bind.v2.model.core.ID;
 
-import br.com.volks.rota2030.model.Grupo;
+import br.com.volks.rota2030.model.ItemDeSegurancaGrupo;
 
-public interface GrupoRepository extends JpaRepository<Grupo, Long>,PagingAndSortingRepository<Grupo, Long>, QueryByExampleExecutor<Grupo> {
+public interface ItemDeSegurancaGrupoRepository extends JpaRepository<ItemDeSegurancaGrupo, Long> {
 	
-	List<Grupo>findByDescricao(String descricao);
+	List<ItemDeSegurancaGrupo>findByDescricao(String descricao);
 
 }

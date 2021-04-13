@@ -13,11 +13,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
 import br.com.volks.rota2030.form.ItemDeSegurancaForm;
-import br.com.volks.rota2030.model.Grupo;
+import br.com.volks.rota2030.model.ItemDeSegurancaGrupo;
 import br.com.volks.rota2030.model.ItemDeSeguranca;
-import br.com.volks.rota2030.model.Tipo;
-import br.com.volks.rota2030.service.GrupoService;
-import br.com.volks.rota2030.service.TipoService;
+import br.com.volks.rota2030.model.ItemDeSegurancaTipo;
+import br.com.volks.rota2030.service.ItemDeSegurancaGrupoService;
+import br.com.volks.rota2030.service.ItemDeSegurancaTipoService;
 
 @TestMethodOrder(OrderAnnotation.class)
 @RunWith(MockitoJUnitRunner.class)
@@ -27,10 +27,10 @@ public class ItemDeSegurancaComponentTest {
 	private ItemDeSegurancaComponent component;
 	
 	@Mock
-	private GrupoService grupoService;
+	private ItemDeSegurancaGrupoService grupoService;
 	
 	@Mock
-	private TipoService tipoService;
+	private ItemDeSegurancaTipoService tipoService;
 	
 	
 	private ItemDeSegurancaForm mockaRequestDto() {
@@ -41,12 +41,12 @@ public class ItemDeSegurancaComponentTest {
 		return new ItemDeSegurancaDto(1L, "item de seguranca x", "norma x", "Grupo A ", "Automovel", false);
 	}
 	
-	private Grupo mockaGrupo() {
-		return new Grupo(1L, "Grupo A");
+	private ItemDeSegurancaGrupo mockaGrupo() {
+		return new ItemDeSegurancaGrupo(1L, "Grupo A");
 	}
 	
-	private Tipo mockaTipo() {
-		return new Tipo(1L, "Automovel");
+	private ItemDeSegurancaTipo mockaTipo() {
+		return new ItemDeSegurancaTipo(1L, "Automovel");
 	}
 	
 	@Test

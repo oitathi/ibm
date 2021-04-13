@@ -75,7 +75,7 @@ public class ItemDeSegurancaControllerTest {
 	
 	@Test
 	public void deveSalvarUmNovoItem() throws Exception {
-		Mockito.when(service.salvaItem(Mockito.<ItemDeSegurancaForm>any())).thenReturn(mockaResponseDto());
+		Mockito.when(service.salva(Mockito.<ItemDeSegurancaForm>any())).thenReturn(mockaResponseDto());
 		
 		mockMvc.perform(post("/item-de-seguranca/novo-item")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -86,7 +86,7 @@ public class ItemDeSegurancaControllerTest {
 	
 	@Test
 	public void deveEditarUmItem() throws Exception {
-		Mockito.when(service.editaItem(Mockito.<ItemDeSegurancaDto>any())).thenReturn(mockaResponseDto());
+		Mockito.when(service.edita(Mockito.<ItemDeSegurancaDto>any())).thenReturn(mockaResponseDto());
 		
 		mockMvc.perform(put("/item-de-seguranca/edita-item/1")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -108,7 +108,7 @@ public class ItemDeSegurancaControllerTest {
 	
 	@Test
 	public void deveDeletarUmItem() throws Exception {
-		Mockito.when(service.deletaItem(Mockito.anyLong(), Mockito.anyString())).thenReturn(true);
+		Mockito.when(service.deleta(Mockito.anyLong(), Mockito.anyString())).thenReturn(true);
 		
 		mockMvc.perform(delete("/item-de-seguranca/deleta-item/{id}/{user}", "1","tester")
 				.contentType(MediaType.APPLICATION_JSON))

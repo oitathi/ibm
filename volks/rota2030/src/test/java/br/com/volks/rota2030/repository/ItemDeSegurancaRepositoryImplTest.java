@@ -31,9 +31,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.support.CrudMethodMetadata;
 
-import br.com.volks.rota2030.model.Grupo;
+import br.com.volks.rota2030.model.ItemDeSegurancaGrupo;
 import br.com.volks.rota2030.model.ItemDeSeguranca;
-import br.com.volks.rota2030.model.Tipo;
+import br.com.volks.rota2030.model.ItemDeSegurancaTipo;
 
 @TestMethodOrder(OrderAnnotation.class)
 @RunWith(MockitoJUnitRunner.class)
@@ -76,12 +76,12 @@ public class ItemDeSegurancaRepositoryImplTest {
 		return new ItemDeSeguranca(1L, "item de Seguranca x" , "norma x", false, mockaGrupo(), mockaTipo());
 	}
 	
-	private Grupo mockaGrupo() {
-		return new Grupo(1L, "Grupo A");
+	private ItemDeSegurancaGrupo mockaGrupo() {
+		return new ItemDeSegurancaGrupo(1L, "Grupo A");
 	}
 	
-	private Tipo mockaTipo() {
-		return new Tipo(1L, "Automovel");
+	private ItemDeSegurancaTipo mockaTipo() {
+		return new ItemDeSegurancaTipo(1L, "Automovel");
 	}
 	
 	@Order(2)

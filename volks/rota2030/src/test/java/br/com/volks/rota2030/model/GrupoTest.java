@@ -8,7 +8,7 @@ public class GrupoTest {
 	
 	@Test
 	public void loadClass() {
-		Grupo grupo = new Grupo();
+		ItemDeSegurancaGrupo grupo = new ItemDeSegurancaGrupo();
 		assertNull(grupo.getId());
 		assertNull(grupo.getDescricao());
 		assertNull(grupo.getItensDeSeguranca());

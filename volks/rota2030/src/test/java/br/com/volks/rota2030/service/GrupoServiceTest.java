@@ -17,21 +17,21 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import br.com.volks.rota2030.exceptions.GrupoNotFoundException;
-import br.com.volks.rota2030.model.Grupo;
-import br.com.volks.rota2030.repository.GrupoRepository;
+import br.com.volks.rota2030.model.ItemDeSegurancaGrupo;
+import br.com.volks.rota2030.repository.ItemDeSegurancaGrupoRepository;
 
 @TestMethodOrder(OrderAnnotation.class)
 @RunWith(MockitoJUnitRunner.class)
 public class GrupoServiceTest {
 	
 	@InjectMocks
-	private GrupoService service;
+	private ItemDeSegurancaGrupoService service;
 	
 	@Mock
-	private GrupoRepository repository;
+	private ItemDeSegurancaGrupoRepository repository;
 	
-	private Grupo mockaGrupo() {
-		return new Grupo(1L, "Grupo A");
+	private ItemDeSegurancaGrupo mockaGrupo() {
+		return new ItemDeSegurancaGrupo(1L, "Grupo A");
 	}
 	
 	@Order(1)
@@ -39,7 +39,7 @@ public class GrupoServiceTest {
 	public void deveListarTodosTipos() {
 		Mockito.when(repository.findAll()).thenReturn(Arrays.asList(mockaGrupo()));
 		
-		List<Grupo> actual = service.listarTodos();
+		List<ItemDeSegurancaGrupo> actual = service.listarTodos();
 		assertEquals(1, actual.size());
 	}
 	
@@ -48,7 +48,7 @@ public class GrupoServiceTest {
 	public void deveBuscarPorDescricao() {
 		Mockito.when(repository.findByDescricao(Mockito.anyString())).thenReturn(Arrays.asList(mockaGrupo()));
 		
-		Grupo actual = service.buscaPorDescricao("Grupo A");
+		ItemDeSegurancaGrupo actual = service.buscaPorDescricao("Grupo A");
 		assertEquals("Grupo A", actual.getDescricao());
 	}
 	

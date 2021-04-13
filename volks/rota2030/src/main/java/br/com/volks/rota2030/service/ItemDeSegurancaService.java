@@ -18,7 +18,7 @@ import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
 import br.com.volks.rota2030.enums.AcoesEnum;
 import br.com.volks.rota2030.enums.StatusRelatorioEnum;
 import br.com.volks.rota2030.enums.TabelasEnum;
-import br.com.volks.rota2030.exceptions.ItemDeSeguracaUpdateException;
+import br.com.volks.rota2030.exceptions.ItemDeSeguracaUpdatedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotDeletedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotSalvedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaSearchException;
@@ -46,33 +46,15 @@ public class ItemDeSegurancaService {
 	@Autowired
 	private LogsRepository logsRepository;
 	
-	
-	
-	public ItemDeSegurancaDto salvaItem(ItemDeSegurancaForm form) {
-		try {
-			ItemDeSeguranca itemSeg =  itemSegurancaComponent.toEntity(form);
-			itemSeg = itemSegurancarepository.save(itemSeg);
-			Logs log = new Logs(form.getUsuario(), AcoesEnum.CRIAR, TabelasEnum.ITEM_DE_SEGURANCA, itemSeg.getId(), itemSeg.toString(), new Date());
-			
-			logsRepository.save(log);
-						
-			return itemSeg.toDto();	
-			
-		}catch (Exception e) {
-			throw new ItemDeSegurancaNotSalvedException(e);
-		}
-	}
-	
-	
 	public Page<ItemDeSegurancaDto> buscaDinamica(Map<String, String> filtro,  int pageNo, int pageSize, String sortBy){
 		try {
-			List<ItemDeSegurancaDto> itensDto = new ArrayList<ItemDeSegurancaDto>();
+			List<ItemDeSegurancaDto> listDto = new ArrayList<ItemDeSegurancaDto>();
 			
 			Page<ItemDeSeguranca> entitiesList = itemSegurancarepository.buscaPorFiltros(filtro, pageNo, pageSize, sortBy);
-			entitiesList.forEach(entity -> itensDto.add(entity.toDto()));
+			entitiesList.forEach(entity -> listDto.add(entity.toDto()));
 			
 			Pageable page = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-			Page<ItemDeSegurancaDto> resultPaged = new PageImpl<ItemDeSegurancaDto>(itensDto, page, itensDto.size());
+			Page<ItemDeSegurancaDto> resultPaged = new PageImpl<ItemDeSegurancaDto>(listDto, page, listDto.size());
 					
 			return resultPaged; 
 			
@@ -91,19 +73,35 @@ public class ItemDeSegurancaService {
 		
 	}
 
+	
+	public ItemDeSegurancaDto salva(ItemDeSegurancaForm form) {
+		try {
+			ItemDeSeguranca itemSeg =  itemSegurancaComponent.toEntity(form);
+			itemSeg = itemSegurancarepository.save(itemSeg);
+			
+			Logs log = new Logs(form.getUsuario(), AcoesEnum.CRIAR, TabelasEnum.ITEM_DE_SEGURANCA, itemSeg.getId(), itemSeg.toString(), new Date());
+			logsRepository.save(log);
+						
+			return itemSeg.toDto();	
+			
+		}catch (Exception e) {
+			throw new ItemDeSegurancaNotSalvedException(e);
+		}
+	}
+	
 		
-	public ItemDeSegurancaDto editaItem(ItemDeSegurancaDto dto) {
+	public ItemDeSegurancaDto edita(ItemDeSegurancaDto dto) {
 		try {
 				itemSegurancarepository.update(dto.getId(),dto.getDescricao(),dto.getNorma(),dto.isObrigatorio(), dto.getGrupo(), dto.getTipo());
 				Logs log = new Logs(dto.getUsuario(), AcoesEnum.EDITAR, TabelasEnum.ITEM_DE_SEGURANCA, dto.getId(), dto.toString(), new Date());
 				return dto;
 				
 		}catch (Exception e) {
-			throw new ItemDeSeguracaUpdateException(e);
+			throw new ItemDeSeguracaUpdatedException(e);
 		}
 	}
 	
-	public boolean deletaItem( Long id, String user) {
+	public boolean deleta( Long id, String user) {
 		try {
 			itemSegurancarepository.deleteById(id);
 			Logs log = new Logs(user, AcoesEnum.EXCLUIR, TabelasEnum.ITEM_DE_SEGURANCA,id, "", new Date());

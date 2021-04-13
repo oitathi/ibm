@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
-import br.com.volks.rota2030.form.ItemDeSegurancaForm;
-import br.com.volks.rota2030.service.ItemDeSegurancaService;
+import br.com.volks.rota2030.dto.ParametroDeTecnologiaDto;
+import br.com.volks.rota2030.form.ParametroDeTecnologiaForm;
+import br.com.volks.rota2030.service.ParametroDeTecnologiaService;
 
 @RestController 
-@RequestMapping(path = "item-de-seguranca")
-public class ItemDeSeguracaController { 
-	
+@RequestMapping(path = "parametro_de_tecnologia")
+public class ParametroDeTecnologiaController {
+
 	@Autowired
-	private ItemDeSegurancaService service;
+	private ParametroDeTecnologiaService service;
 	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(path = "/lista", produces = "application/json")
-	public Page<ItemDeSegurancaDto> buscaDinamica(
+	public Page<ParametroDeTecnologiaDto> buscaDinamica(
 			 @RequestParam (required = false) Map<String,String> filtro,
 			 @RequestParam(defaultValue = "0") int pageNo, 
              @RequestParam(defaultValue = "10") int pageSize,
@@ -41,24 +41,23 @@ public class ItemDeSeguracaController {
 	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(path = "/lista/{id}", produces = "application/json")
-	public ItemDeSegurancaDto buscaPorId(@PathVariable Long id) {
+	public ParametroDeTecnologiaDto buscaPorId(@PathVariable Long id) {
 		return service.buscaPorId(id);
 		
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(path = "/novo", consumes = "application/json", produces = "application/json")
-	public ItemDeSegurancaDto salva(@RequestBody ItemDeSegurancaForm novo) {
-		return service.salva(novo);
+	public ParametroDeTecnologiaDto salva(@RequestBody ParametroDeTecnologiaForm novoParametro) {
+		return service.salva(novoParametro);
 	}
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PutMapping(path ="/edita/{id}",consumes = "application/json", produces = "application/json")
-	public ItemDeSegurancaDto edita(@RequestBody ItemDeSegurancaDto editado)  {
-		return service.edita(editado);
+	public ParametroDeTecnologiaDto edita(@RequestBody ParametroDeTecnologiaForm parametroEditado)  {
+		return service.edita(parametroEditado);
 	}
 	
-		
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@DeleteMapping(path = "/deleta/{id}/{user}",produces = "application/json")
 	public boolean deleta(@PathVariable Long id, @PathVariable String user) {
@@ -67,10 +66,8 @@ public class ItemDeSeguracaController {
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PostMapping(path= "/download-relatorio", produces = "application/json")
-	public long donwloadRelatorio(@RequestBody List<ItemDeSegurancaDto> itensDto) {
-		return service.criaTokenDeAcompanhamento(itensDto);
+	public long donwloadRelatorio(@RequestBody List<ParametroDeTecnologiaDto> parametrosDto) {
+		return service.criaTokenDeAcompanhamento(parametrosDto);
 	}
 	
-	
-
 }

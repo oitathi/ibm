@@ -17,21 +17,21 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import br.com.volks.rota2030.exceptions.TipoNotFoundException;
-import br.com.volks.rota2030.model.Tipo;
-import br.com.volks.rota2030.repository.TipoRepository;
+import br.com.volks.rota2030.model.ItemDeSegurancaTipo;
+import br.com.volks.rota2030.repository.ItemDeSegurancaTipoRepository;
 
 @TestMethodOrder(OrderAnnotation.class)
 @RunWith(MockitoJUnitRunner.class)
 public class TipoServiceTest {
 	
 	@InjectMocks
-	private TipoService service;
+	private ItemDeSegurancaTipoService service;
 	
 	@Mock
-	private TipoRepository repository;
+	private ItemDeSegurancaTipoRepository repository;
 	
-	private Tipo mockaTipo() {
-		return new Tipo(1L, "Automovel");
+	private ItemDeSegurancaTipo mockaTipo() {
+		return new ItemDeSegurancaTipo(1L, "Automovel");
 	}
 	
 	@Order(1)
@@ -39,7 +39,7 @@ public class TipoServiceTest {
 	public void deveListarTodosTipos() {
 		Mockito.when(repository.findAll()).thenReturn(Arrays.asList(mockaTipo()));
 		
-		List<Tipo> actual = service.listarTodos();
+		List<ItemDeSegurancaTipo> actual = service.listarTodos();
 		assertEquals(1, actual.size());
 	}
 	
@@ -48,7 +48,7 @@ public class TipoServiceTest {
 	public void deveBuscarPorDescricao() {
 		Mockito.when(repository.findByDescricao(Mockito.anyString())).thenReturn(Arrays.asList(mockaTipo()));
 		
-		Tipo actual = service.buscaPorDescricao("Automovel");
+		ItemDeSegurancaTipo actual = service.buscaPorDescricao("Automovel");
 		assertEquals("Automovel", actual.getDescricao());
 	}
 	

@@ -8,7 +8,7 @@ public class TipoTest {
 	
 	@Test
 	public void loadClass() {
-		Tipo tipo = new Tipo();
+		ItemDeSegurancaTipo tipo = new ItemDeSegurancaTipo();
 		assertNull(tipo.getId());
 		assertNull(tipo.getDescricao());
 		assertNull(tipo.getItensDeSeguranca());

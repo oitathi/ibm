@@ -7,27 +7,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ItemDeSegurancaForm {
 
-	@JsonProperty("descricao")
 	@NotBlank(message = "Descricao eh obrigatoria")
 	private String descricao;
 
-	@JsonProperty("norma")
 	@NotBlank(message = "Norma Contram eh obrigatoria")
 	private String norma;
 
 	@NotBlank(message = "Grupo eh obrigatorio")
-	@JsonProperty("grupo")
 	private String grupo;
 
 	@NotBlank(message = "Tipo eh obrigatorio")
-	@JsonProperty("tipo")
 	private String tipo;
 
-	@JsonProperty("obrigatorio")
 	private boolean obrigatorio;
 
-	@JsonProperty("usuario")
-	@NotBlank(message = "Usuario eh obrigatorio")
+	
 	private String usuario;
 	
 	public ItemDeSegurancaForm() {

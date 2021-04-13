@@ -45,6 +45,10 @@ public class ItemDeSegurancaRepositoryImpl implements ItemDeSegurancaRepositoryC
 	    for (Map.Entry<String, String> entry : filtro.entrySet()) {
 	    	if(StringUtils.isNotBlank(entry.getValue())) {
 		    	switch (entry.getKey()) {
+		    	
+		    		case"id":
+		    			predicate = cb.and(cb.equal(itemSeg.get("id"), entry.getValue()));
+		    			break;
 					
 			    	case "descricao":
 			    		predicate = cb.and(cb.equal(itemSeg.get("descricao"), entry.getValue()));
@@ -61,6 +65,10 @@ public class ItemDeSegurancaRepositoryImpl implements ItemDeSegurancaRepositoryC
 			    	case "tipo":
 			    		predicate = cb.and(cb.equal(itemSeg.get("tipo").get("descricao"), entry.getValue()));
 			    		break; 
+			    		
+			    	case "obrigatorio":
+			    		predicate = cb.and(cb.equal(itemSeg.get("isObrigatorio"), entry.getValue()));
+			    		break;
 		    	}
 	   		}
 	    }

@@ -1,5 +1,7 @@
 package br.com.volks.rota2030.util;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,5 +21,10 @@ public class DateOperations {
 		
 		return true;
 	}
+	
+	public static String toString(Date date) {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
+        return dateFormat.format(date);  
+    }
 
 }

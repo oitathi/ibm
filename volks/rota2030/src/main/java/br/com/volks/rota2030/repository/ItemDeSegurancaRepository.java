@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.volks.rota2030.model.Grupo;
+import br.com.volks.rota2030.model.ItemDeSegurancaGrupo;
 import br.com.volks.rota2030.model.ItemDeSeguranca;
-import br.com.volks.rota2030.model.Tipo;
+import br.com.volks.rota2030.model.ItemDeSegurancaTipo;
 
 public interface ItemDeSegurancaRepository extends JpaRepository<ItemDeSeguranca, Long>,PagingAndSortingRepository<ItemDeSeguranca, Long>, ItemDeSegurancaRepositoryCustom {
 
@@ -19,9 +19,9 @@ public interface ItemDeSegurancaRepository extends JpaRepository<ItemDeSeguranca
 				+ " iseg.norma = ?3,"
 				+ " iseg.isObrigatorio =?4,"
 				+ " iseg.grupo ="
-				+ 		" (SELECT g FROM Grupo g WHERE g.descricao =?5),"
+				+ 		" (SELECT g FROM ItemDeSegurancaGrupo g WHERE g.descricao =?5),"
 				+ " iseg.tipo ="
-				+ 		" (SELECT t FROM Tipo t WHERE t.descricao = ?6)"
+				+ 		" (SELECT t FROM ItemDeSegurancaTipo t WHERE t.descricao = ?6)"
 				+ " WHERE iseg.id =?1")
 	int update(long isegId, String descricao, String norma, boolean isObrigatorio, String grupoDescricao, String tipoDescricao);
 
