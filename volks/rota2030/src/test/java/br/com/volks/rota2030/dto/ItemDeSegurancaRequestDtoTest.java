@@ -28,28 +28,16 @@ public class ItemDeSegurancaRequestDtoTest {
 	
 	@Test
 	public void deveRetornarItemDeSegurancaValido() {
-		ItemDeSegurancaForm dto = new ItemDeSegurancaForm();
-		dto.setDescricao("descricao");
-		dto.setNorma("norma");
-		dto.setGrupo("GRUPO_A");
-		dto.setTipo("TIPO_AUTOMOVEL");
-		dto.setObrigatorio(true);
-		dto.setUsuario("usuario");
-		
-		Set<ConstraintViolation<ItemDeSegurancaForm>> violations = validator.validate(dto);
+		ItemDeSegurancaForm form = new ItemDeSegurancaForm("descricao", "norma", "GRUPO_A", "TIPO_AUTOMOVEL", false, "usuario");
+				
+		Set<ConstraintViolation<ItemDeSegurancaForm>> violations = validator.validate(form);
         Assert.assertTrue(violations.isEmpty());
 	}
 	
 	@Test
 	public void deveRetornarItemDeSegurancaInvalido() {
-		ItemDeSegurancaForm dto = new ItemDeSegurancaForm();
-		dto.setDescricao("");
-		dto.setNorma("");
-		dto.setGrupo("");
-		dto.setTipo("");
-		dto.setObrigatorio(true);
-		dto.setUsuario("");
-		
+		ItemDeSegurancaForm dto = new ItemDeSegurancaForm(null, null, null, null, false, null);
+			
 		Set<ConstraintViolation<ItemDeSegurancaForm>> violations = validator.validate(dto);
         Assert.assertEquals(5, violations.size());
 	}

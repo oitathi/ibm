@@ -81,8 +81,10 @@ public class UsuarioDoSistemaService {
 	public UsuarioDoSistemaDto edita(UsuarioDoSistemaDto dto) {
 		try {
 			
-			usuarioRepository.update(dto.getId(), dto.getEmail(), dto.isExpirado(), dto.getDataUltimoAcesso(), dto.getPerfil());
+			usuarioRepository.update(dto.getId(), dto.getEmail(), dto.isAcessoExpirado(),  dto.isAcessoAtivo(), dto.getDataUltimoAcesso(), dto.getPerfil());
 			Logs log = new Logs(dto.getUsuario(), AcoesEnum.EDITAR, TabelasEnum.USUARIO, dto.getId(), dto.toString(), new Date());
+			logsRepository.save(log);
+			
 			return dto;
 			
 		}catch(Exception e) {

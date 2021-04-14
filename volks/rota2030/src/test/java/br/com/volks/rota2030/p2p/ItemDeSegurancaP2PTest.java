@@ -3,7 +3,6 @@ package br.com.volks.rota2030.p2p;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -20,8 +19,8 @@ import br.com.volks.rota2030.form.ItemDeSegurancaForm;
 
 
 
-public class ItemDeSegurancaP2PTest {
-/*@TestMethodOrder(OrderAnnotation.class)
+
+@TestMethodOrder(OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = ("spring.h2.console.enabled=true"))
 public class ItemDeSegurancaP2PTest {
 	
@@ -36,7 +35,7 @@ public class ItemDeSegurancaP2PTest {
 	@Order(2)
 	public void deveRetornarListaDeItensSemFiltro() {
 		filtro = new HashMap<>();
-		Page<ItemDeSegurancaResponseDto> actual = controller.listaTodos(filtro, 0, 10, "id");
+		Page<ItemDeSegurancaDto> actual = controller.buscaDinamica(filtro, 0, 10, "id");
 		
 		assertEquals(4, actual.getTotalElements());
 	}
@@ -46,7 +45,7 @@ public class ItemDeSegurancaP2PTest {
 	public void deveRetornarListaDeItensFiltradoPorDescricao() {
 		filtro = new HashMap<>();
 		filtro.put("descricao", "Item X");
-		Page<ItemDeSegurancaResponseDto> actual = controller.listaTodos(filtro, 0, 10, "id");
+		Page<ItemDeSegurancaDto> actual = controller.buscaDinamica(filtro, 0, 10, "id");
 		
 		assertEquals(1, actual.getTotalElements());
 	}
@@ -56,7 +55,7 @@ public class ItemDeSegurancaP2PTest {
 	public void deveRetornarListaDeItensFiltradosPorNorma() {
 		filtro = new HashMap<>();
 		filtro.put("norma", "Norma X");
-		Page<ItemDeSegurancaResponseDto> actual = controller.listaTodos(filtro, 0, 10, "id");
+		Page<ItemDeSegurancaDto> actual = controller.buscaDinamica(filtro, 0, 10, "id");
 		
 		assertEquals(1, actual.getTotalElements());
 	}
@@ -66,7 +65,7 @@ public class ItemDeSegurancaP2PTest {
 	public void deveRetornarListaDeItensFiltradosPorGrupo() {
 		filtro = new HashMap<>();
 		filtro.put("grupo", "Grupo C");
-		Page<ItemDeSegurancaResponseDto> actual = controller.listaTodos(filtro, 0, 10, "id");
+		Page<ItemDeSegurancaDto> actual = controller.buscaDinamica(filtro, 0, 10, "id");
 		
 		assertEquals(1, actual.getTotalElements());
 	}
@@ -76,7 +75,7 @@ public class ItemDeSegurancaP2PTest {
 	public void deveRetornarListaDeItensFiltradosPorTipo() {
 		filtro = new HashMap<>();
 		filtro.put("tipo", "Utilitario");
-		Page<ItemDeSegurancaResponseDto> actual = controller.listaTodos(filtro, 0, 10, "id");
+		Page<ItemDeSegurancaDto> actual = controller.buscaDinamica(filtro, 0, 10, "id");
 		
 		assertEquals(1, actual.getTotalElements());
 	}
@@ -89,7 +88,7 @@ public class ItemDeSegurancaP2PTest {
 		filtro.put("norma", "Norma X");
 		filtro.put("grupo", "Grupo A");
 		filtro.put("tipo", "Automovel");
-		Page<ItemDeSegurancaResponseDto> actual = controller.listaTodos(filtro, 0, 10, "id");
+		Page<ItemDeSegurancaDto> actual = controller.buscaDinamica(filtro, 0, 10, "id");
 		
 		assertEquals(1, actual.getTotalElements());
 	}
@@ -102,7 +101,7 @@ public class ItemDeSegurancaP2PTest {
 		filtro.put("norma", null);
 		filtro.put("grupo", "Grupo A");
 		filtro.put("tipo", "Automovel");
-		Page<ItemDeSegurancaResponseDto> actual = controller.listaTodos(filtro, 0, 10, "id");
+		Page<ItemDeSegurancaDto> actual = controller.buscaDinamica(filtro, 0, 10, "id");
 		
 		assertEquals(2, actual.getTotalElements());
 	}
@@ -110,21 +109,21 @@ public class ItemDeSegurancaP2PTest {
 	@Test
 	@Order(9)
 	public void deveSalvarUmNovoItem() {
-		ItemDeSegurancaRequestDto requestDto = new ItemDeSegurancaRequestDto("item teste", "norma teste", "Grupo A", "Automovel", false, "tester");
-		controller.novoItemDeSeguranca(requestDto);
+		ItemDeSegurancaForm requestDto = new ItemDeSegurancaForm("item teste", "norma teste", "Grupo A", "Automovel", false, "tester");
+		controller.salva(requestDto);
 		
 		filtro = new HashMap<>();
 		filtro.put("descricao", "item teste");
 		
-		Page<ItemDeSegurancaResponseDto> actual = controller.listaTodos(filtro, 0, 10, "id");
+		Page<ItemDeSegurancaDto> actual = controller.buscaDinamica(filtro, 0, 10, "id");
 		assertEquals(1, actual.getTotalElements());
 	}
 	
 	@Test
 	@Order(10)
 	public void deveEditarUmItem() {
-		ItemDeSegurancaResponseDto dtoParaEditar = new ItemDeSegurancaResponseDto(1L, "Item X", "Norma Alfa", "Grupo C", "Caminhonete",  false, "tester");
-		ItemDeSegurancaResponseDto dtoEditado = controller.editaItem(dtoParaEditar);
+		ItemDeSegurancaDto dtoParaEditar = new ItemDeSegurancaDto(1L, "Item X", "Norma Alfa", "Grupo C", "Caminhonete",  false, "tester");
+		ItemDeSegurancaDto dtoEditado = controller.edita(dtoParaEditar);
 		
 		
 		dtoEditado = controller.buscaPorId(1L);
@@ -140,9 +139,9 @@ public class ItemDeSegurancaP2PTest {
 	@Test
 	@Order(11)
 	public void deveDeletarUmItem() {
-		boolean actual = controller.deletaItem(1L, "tester");
+		boolean actual = controller.deleta(1L, "tester");
 		assertEquals(true, actual);
 	}
-	*/
+	
 
 }

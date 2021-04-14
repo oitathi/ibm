@@ -19,6 +19,10 @@ public class UsuarioDoSistemaForm {
 	@NotBlank(message = "Usuario eh obrigatorio")
 	private String usuario;
 	
+	private boolean isAcessoExpirado;
+	
+	private boolean isAcessoAtivo;
+	
 	public String getLogin() {
 		return login;
 	}

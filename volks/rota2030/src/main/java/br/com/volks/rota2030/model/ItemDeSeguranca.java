@@ -13,6 +13,7 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 
 import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
+import br.com.volks.rota2030.util.StringOperations;
 
 @NamedEntityGraph(name = "item-com-grupo-e-tipo", 
 attributeNodes = { @NamedAttributeNode("grupo"),

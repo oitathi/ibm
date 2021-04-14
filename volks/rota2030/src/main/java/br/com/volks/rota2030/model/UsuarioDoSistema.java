@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import br.com.volks.rota2030.dto.UsuarioDoSistemaDto;
 import br.com.volks.rota2030.util.DateOperations;
+import br.com.volks.rota2030.util.StringOperations;
 
 @NamedEntityGraph(name = "usuario-com-perfil", 
 attributeNodes = { @NamedAttributeNode("perfil") }
@@ -42,6 +43,9 @@ public class UsuarioDoSistema  {
 	
 	@Column(name = "USUARIO_DO_SISTEMA_EXPIRADO")
 	private boolean isAcessoExpirado;
+	
+	@Column(name = "USUARIO_DO_SISTEMA_ATIVO")
+	private boolean isAcessoAtivo;
 
 	@Column(name = "UUSUARIO_DO_SISTEMA_DATA_ULTIMO_ACESSO")
 	private Date dataUltimoAcesso;
@@ -62,11 +66,13 @@ public class UsuarioDoSistema  {
 		this.nome = nome;
 		this.email = email;
 		this.perfil = perfil;
+		
+		//sempre q salva um novo usuario
+		this.isAcessoExpirado = false;
+		this.isAcessoAtivo = true;
 	}
 
-	public UsuarioDoSistemaDto toDto() {
-		return new UsuarioDoSistemaDto(id, nome, login, email, perfil.getDescricao(), isAcessoExpirado, DateOperations.toString(dataUltimoAcesso));
-	}
+	
 
 	public Long getId() {
 		return id;
@@ -87,6 +93,11 @@ public class UsuarioDoSistema  {
 	public boolean isAcessoExpirado() {
 		return isAcessoExpirado;
 	}
+	
+	
+	public boolean isAcessoAtivo() {
+		return isAcessoAtivo;
+	}
 
 	public Date getDataUltimoAcesso() {
 		return dataUltimoAcesso;
@@ -102,7 +113,9 @@ public class UsuarioDoSistema  {
 				+ ", perfil=" + perfil.getDescricao() + "]";
 	}
 	
-	
+	public UsuarioDoSistemaDto toDto() {
+		return new UsuarioDoSistemaDto(id, nome, login, email, perfil.getDescricao(), isAcessoExpirado, isAcessoAtivo, DateOperations.toString(dataUltimoAcesso));
+	}
 	
 
 	//DateOperations.isUltimoAcessoHaMenosDe90Dias(dataUltimoAcesso);

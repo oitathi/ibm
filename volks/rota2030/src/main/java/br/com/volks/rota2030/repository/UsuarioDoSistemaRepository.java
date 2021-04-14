@@ -15,10 +15,11 @@ public interface UsuarioDoSistemaRepository extends JpaRepository<UsuarioDoSiste
 	@Query("UPDATE UsuarioDoSistema u SET"
 				+ " u.email = ?2,"
 				+ " u.isAcessoExpirado = ?3,"
-				+ " u.dataUltimoAcesso =?4,"
+				+ " u.isAcessoAtivo = ?4"
+				+ " u.dataUltimoAcesso =?5,"
 				+ " u.perfil ="
-				+ 		" (SELECT p FROM PerfilDeAcessoDoSistema p WHERE p.descricao =?5)"
+				+ 		" (SELECT p FROM PerfilDeAcessoDoSistema p WHERE p.descricao =?6)"
 				+ " WHERE u.id =?1")
-	int update(long usuarioId, String usuarioEmail, boolean usuarioIsExpirado, String usuarioDataUltimoAcesso, String usuarioPerfil);
+	int update(long usuarioId, String usuarioEmail, boolean usuarioIsExpirado, boolean usuarioIsAtivo, String usuarioDataUltimoAcesso, String usuarioPerfil);
 
 }

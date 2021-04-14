@@ -26,4 +26,18 @@ public class TelaDoSitema {
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "telas")
 	private Set<PerfilDeAcessoDoSistema> perfis;
 
+	public Long getId() {
+		return id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public Set<PerfilDeAcessoDoSistema> getPerfis() {
+		return perfis;
+	}
+	
+	
+
 }

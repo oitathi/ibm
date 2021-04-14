@@ -23,7 +23,7 @@ import br.com.volks.rota2030.service.UsuarioDoSistemaService;
 
 @RestController 
 @RequestMapping(path = "usuario")
-public class UsuarioController {
+public class UsuarioDoSistemaController {
 	
 	@Autowired
 	private UsuarioDoSistemaService service;
@@ -49,7 +49,7 @@ public class UsuarioController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(path = "/novo", consumes = "application/json", produces = "application/json")
-	public UsuarioDoSistemaDto salvaItem(@RequestBody UsuarioDoSistemaForm novo) {
+	public UsuarioDoSistemaDto salva(@RequestBody UsuarioDoSistemaForm novo) {
 		return service.salva(novo);
 	}
 	

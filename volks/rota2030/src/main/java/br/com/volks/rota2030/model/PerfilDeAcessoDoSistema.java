@@ -45,24 +45,16 @@ public class PerfilDeAcessoDoSistema {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getDescricao() {
 		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 
 	public Set<UsuarioDoSistema> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(Set<UsuarioDoSistema> usuarios) {
-		this.usuarios = usuarios;
+	public Set<TelaDoSitema> getTelas() {
+		return telas;
 	}
 
 

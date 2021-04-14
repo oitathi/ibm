@@ -7,14 +7,8 @@ public class ItemDeSegurancaDto {
 	private String norma;
 	private String grupo;
 	private String tipo;
-	private String usuario;
 	private boolean obrigatorio;
-	
-	
-	public ItemDeSegurancaDto() {
-		
-	}
-	
+	private String usuario;
 	
 	public ItemDeSegurancaDto(long id, String descricao, String norma, String grupo, String tipo,	boolean obrigatorio) {
 		this.id = id;
@@ -25,9 +19,12 @@ public class ItemDeSegurancaDto {
 		this.obrigatorio = obrigatorio;
 	}
 
+	
+	
 
 
-	public ItemDeSegurancaDto(long id, String descricao, String norma, String grupo, String tipo, boolean obrigatorio, String usuario) {
+	public ItemDeSegurancaDto(long id, String descricao, String norma, String grupo, String tipo, boolean obrigatorio,
+			String usuario) {
 		this.id = id;
 		this.descricao = descricao;
 		this.norma = norma;
@@ -36,6 +33,9 @@ public class ItemDeSegurancaDto {
 		this.obrigatorio = obrigatorio;
 		this.usuario = usuario;
 	}
+
+
+
 
 
 	public String toCsv() {
@@ -64,10 +64,6 @@ public class ItemDeSegurancaDto {
 	}
 
 
-	public String getUsuario() {
-		return usuario;
-	}
-
 
 	public String getDescricao() {
 		return descricao;
@@ -91,6 +87,11 @@ public class ItemDeSegurancaDto {
 
 	public boolean isObrigatorio() {
 		return obrigatorio;
+	}
+
+
+	public String getUsuario() {
+		return usuario;
 	}
 
 

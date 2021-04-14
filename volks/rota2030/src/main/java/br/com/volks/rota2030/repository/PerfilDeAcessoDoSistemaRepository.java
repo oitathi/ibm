@@ -9,6 +9,6 @@ import br.com.volks.rota2030.model.PerfilDeAcessoDoSistema;
 
 public interface PerfilDeAcessoDoSistemaRepository extends JpaRepository<PerfilDeAcessoDoSistema, Long> { 
 
-	@Query("SELECT p FROM PerfilDeAcessoDoSistema p JOIN TelasDoSistema t ON p.id = t.id WHERE p.descricao = ?1")
+	@Query("SELECT p FROM PerfilDeAcessoDoSistema p JOIN p.telas t ON p.id = t.id WHERE p.descricao = ?1")
 	Optional<PerfilDeAcessoDoSistema> findByDescricao(String descricao);
 }

@@ -7,18 +7,23 @@ public class UsuarioDoSistemaDto {
 	private String nome;
 	private String email;
 	private String perfil;
-	private boolean isExpirado;
+	private boolean isAcessoExpirado;
+	private boolean isAcessoAtivo;
 	private String dataUltimoAcesso;
 	private String usuario;
+		
 	
-	public UsuarioDoSistemaDto(long id, String login, String nome, String email, String perfil, boolean isExpirado, String dataUltimoAcesso) {
+	
+	public UsuarioDoSistemaDto(long id, String login, String nome, String email, String perfil, boolean isAcessoExpirado, boolean isAcessoAtivo, String dataUltimoAcesso) {
 		this.id = id;
 		this.login = login;
 		this.nome = nome;
 		this.email = email;
 		this.perfil = perfil;
-		this.isExpirado = isExpirado;
+		this.isAcessoExpirado = isAcessoExpirado;
+		this.isAcessoAtivo = isAcessoAtivo;
 		this.dataUltimoAcesso = dataUltimoAcesso;
+		
 	}
 
 
@@ -47,8 +52,14 @@ public class UsuarioDoSistemaDto {
 	}
 
 
-	public boolean isExpirado() {
-		return isExpirado;
+	
+	public boolean isAcessoExpirado() {
+		return isAcessoExpirado;
+	}
+
+
+	public boolean isAcessoAtivo() {
+		return isAcessoAtivo;
 	}
 
 
@@ -61,7 +72,9 @@ public class UsuarioDoSistemaDto {
 		return usuario;
 	}
 
+	
 
+	
 
 	
 	

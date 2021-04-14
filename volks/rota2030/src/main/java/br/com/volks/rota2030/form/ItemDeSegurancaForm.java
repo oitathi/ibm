@@ -4,6 +4,8 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.volks.rota2030.dto.UsuarioDoSistemaDto;
+
 
 public class ItemDeSegurancaForm {
 
@@ -21,12 +23,8 @@ public class ItemDeSegurancaForm {
 
 	private boolean obrigatorio;
 
-	
 	private String usuario;
 	
-	public ItemDeSegurancaForm() {
-		
-	}
 
 	public ItemDeSegurancaForm(String descricao, String norma, String grupo, String tipo, boolean obrigatorio, String usuario) {
 		this.descricao = descricao;
@@ -37,53 +35,37 @@ public class ItemDeSegurancaForm {
 		this.usuario = usuario;
 	}
 
+
 	public String getDescricao() {
 		return descricao;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
 
 	public String getNorma() {
 		return norma;
 	}
 
-	public void setNorma(String norma) {
-		this.norma = norma;
-	}
 
 	public String getGrupo() {
 		return grupo;
 	}
 
-	public void setGrupo(String grupo) {
-		this.grupo = grupo;
-	}
 
 	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
 
 	public boolean isObrigatorio() {
 		return obrigatorio;
 	}
 
-	public void setObrigatorio(boolean obrigatorio) {
-		this.obrigatorio = obrigatorio;
-	}
 
 	public String getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
+	
 
 	
 
