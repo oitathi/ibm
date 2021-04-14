@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TELA_SISTEMA")
-public class TelaDoSitema {
+public class TelaDoSistema {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +37,12 @@ public class TelaDoSitema {
 	public Set<PerfilDeAcessoDoSistema> getPerfis() {
 		return perfis;
 	}
+
+	@Override
+	public String toString() {
+		return "TelaDoSistema [id=" + id + ", descricao=" + descricao + "]";
+	}
+	
 	
 	
 

@@ -18,7 +18,7 @@ import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
 import br.com.volks.rota2030.enums.AcoesEnum;
 import br.com.volks.rota2030.enums.StatusRelatorioEnum;
 import br.com.volks.rota2030.enums.TabelasEnum;
-import br.com.volks.rota2030.exceptions.ItemDeSeguracaUpdatedException;
+import br.com.volks.rota2030.exceptions.ItemDeSeguracaNotUpdatedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotDeletedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotSalvedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaSearchException;
@@ -94,10 +94,11 @@ public class ItemDeSegurancaService {
 		try {
 				itemSegurancarepository.update(dto.getId(),dto.getDescricao(),dto.getNorma(),dto.isObrigatorio(), dto.getGrupo(), dto.getTipo());
 				Logs log = new Logs(dto.getUsuario(), AcoesEnum.EDITAR, TabelasEnum.ITEM_DE_SEGURANCA, dto.getId(), dto.toString(), new Date());
+				logsRepository.save(log);
 				return dto;
 				
 		}catch (Exception e) {
-			throw new ItemDeSeguracaUpdatedException(e);
+			throw new ItemDeSeguracaNotUpdatedException(e);
 		}
 	}
 	

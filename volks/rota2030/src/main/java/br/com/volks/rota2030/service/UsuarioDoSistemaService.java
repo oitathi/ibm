@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import br.com.volks.rota2030.component.UsuarioDoSistemaComponent;
 import br.com.volks.rota2030.dto.UsuarioDoSistemaDto;
 import br.com.volks.rota2030.enums.AcoesEnum;
 import br.com.volks.rota2030.enums.TabelasEnum;
+import br.com.volks.rota2030.exceptions.UsuarioDoSistemaNotFoundException;
 import br.com.volks.rota2030.exceptions.UsuarioDoSistemaNotSalvedException;
 import br.com.volks.rota2030.exceptions.UsuarioDoSistemaNotUpdatedException;
 import br.com.volks.rota2030.exceptions.UsuarioDoSistemaSearchException;
@@ -63,13 +65,25 @@ public class UsuarioDoSistemaService {
 				throw new UsuarioDoSistemaSearchException(e);
 			}
 	}
+	
+	public UsuarioDoSistema buscaPorLogin(String login) {
+		try {
+			Optional<UsuarioDoSistema> usuarioOp = usuarioRepository.findByLogin(login);
+			if(usuarioOp.isPresent()) {
+				return usuarioOp.get();
+			}
+			throw new UsuarioDoSistemaNotFoundException(login);
+		}catch (Exception e) {
+			throw new UsuarioDoSistemaSearchException(e);
+		}
+	}
 
 	public UsuarioDoSistemaDto salva(UsuarioDoSistemaForm form) {
 		try {
 			UsuarioDoSistema usuario = usuarioComponent.toEntity(form);
 			usuario = usuarioRepository.save(usuario);
 			
-			Logs log = new Logs(form.getUsuario(), AcoesEnum.CRIAR, TabelasEnum.USUARIO, usuario.getId(), usuario.toString(), new Date());
+			Logs log = new Logs(form.getUsuarioLogado(), AcoesEnum.CRIAR, TabelasEnum.USUARIO, usuario.getId(), usuario.toString(), new Date());
 			logsRepository.save(log);
 			
 			return usuario.toDto();

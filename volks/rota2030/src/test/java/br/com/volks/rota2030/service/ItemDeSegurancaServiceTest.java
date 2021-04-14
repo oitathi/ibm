@@ -30,7 +30,7 @@ import br.com.volks.rota2030.component.ItemDeSegurancaComponent;
 import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
 import br.com.volks.rota2030.enums.AcoesEnum;
 import br.com.volks.rota2030.enums.TabelasEnum;
-import br.com.volks.rota2030.exceptions.ItemDeSeguracaUpdatedException;
+import br.com.volks.rota2030.exceptions.ItemDeSeguracaNotUpdatedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotDeletedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaNotSalvedException;
 import br.com.volks.rota2030.exceptions.ItemDeSegurancaSearchException;
@@ -176,7 +176,7 @@ public class ItemDeSegurancaServiceTest {
 	}
 	
 	@Order(8)
-	@Test(expected = ItemDeSeguracaUpdatedException.class)
+	@Test(expected = ItemDeSeguracaNotUpdatedException.class)
 	public void deveLancarExcecaoAoEditarUmItem() {
 		Mockito.when(itemSegurancarepository.update(
 				Mockito.anyLong(),

@@ -1,5 +1,7 @@
 package br.com.volks.rota2030.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +24,6 @@ public interface UsuarioDoSistemaRepository extends JpaRepository<UsuarioDoSiste
 				+ " WHERE u.id =?1")
 	int update(long usuarioId, String usuarioEmail, boolean usuarioIsExpirado, boolean usuarioIsAtivo, String usuarioDataUltimoAcesso, String usuarioPerfil);
 
+	
+	Optional<UsuarioDoSistema> findByLogin(String login);
 }

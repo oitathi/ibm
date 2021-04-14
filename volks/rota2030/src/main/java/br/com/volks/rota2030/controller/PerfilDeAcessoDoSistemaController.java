@@ -1,7 +1,5 @@
 package br.com.volks.rota2030.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.volks.rota2030.dto.PerfilDeAcessoDoSistemaDto;
-import br.com.volks.rota2030.dto.UsuarioDoSistemaDto;
 import br.com.volks.rota2030.form.PerfilDeAcessoDoSistemaForm;
 import br.com.volks.rota2030.service.PerfilDeAcessoDoSistemaService;
 
@@ -30,23 +27,20 @@ public class PerfilDeAcessoDoSistemaController {
 	
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(path = "/lista", produces = "application/json")
-	public Page<PerfilDeAcessoDoSistemaDto> buscaDinamica(
-			 @RequestParam (required = false) Map<String,String> filtro,
-			 @RequestParam(defaultValue = "0") int pageNo, 
-             @RequestParam(defaultValue = "10") int pageSize,
-             @RequestParam(defaultValue = "id") String sortBy) {
+	public Page<PerfilDeAcessoDoSistemaDto> buscaTodos(	@RequestParam(defaultValue = "0") int pageNo, 
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(defaultValue = "id") String sortBy){
+		return service.buscaTodosPerfisComTelasEUsuarios(pageNo, pageSize, sortBy);
 		
-		return service.buscaDinamica(filtro, pageNo, pageSize, sortBy);
 	}
-	
 	
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(path = "/lista/{id}", produces = "application/json")
-	public PerfilDeAcessoDoSistemaDto buscaPorId(@PathVariable Long id) {
-		return service.buscaPorId(id);
+	@GetMapping(path = "/lista/{descricao}", produces = "application/json")
+	public PerfilDeAcessoDoSistemaDto buscaPorDescricao(@PathVariable String descricao) {
+		return service.buscaPorDescricaoFullLoad(descricao);
 		
 	}
-	
+		
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(path = "/novo", consumes = "application/json", produces = "application/json")
 	public PerfilDeAcessoDoSistemaDto salva(@RequestBody PerfilDeAcessoDoSistemaForm novo) {
@@ -55,7 +49,7 @@ public class PerfilDeAcessoDoSistemaController {
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@PutMapping(path ="/edita/{id}",consumes = "application/json", produces = "application/json")
-	public UsuarioDoSistemaDto edita(@RequestBody PerfilDeAcessoDoSistemaDto editado)  {
+	public PerfilDeAcessoDoSistemaDto edita(@RequestBody PerfilDeAcessoDoSistemaDto editado)  {
 		return service.edita(editado);
 	}
 	

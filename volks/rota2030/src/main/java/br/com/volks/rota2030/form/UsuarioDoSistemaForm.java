@@ -17,7 +17,7 @@ public class UsuarioDoSistemaForm {
 	private String perfil;
 
 	@NotBlank(message = "Usuario eh obrigatorio")
-	private String usuario;
+	private String usuarioLogado;
 	
 	private boolean isAcessoExpirado;
 	
@@ -39,8 +39,8 @@ public class UsuarioDoSistemaForm {
 		return perfil;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getUsuarioLogado() {
+		return usuarioLogado;
 	}
 	
 	
