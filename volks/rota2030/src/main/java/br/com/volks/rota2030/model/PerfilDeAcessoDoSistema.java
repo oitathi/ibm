@@ -53,6 +53,10 @@ public class PerfilDeAcessoDoSistema {
 	 
 	 
 	 
+	public PerfilDeAcessoDoSistema() {
+		
+	}
+
 	public PerfilDeAcessoDoSistema(Long id, String descricao, Set<TelaDoSistema> telas) {
 		this.id = id;
 		this.descricao = descricao;

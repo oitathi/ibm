@@ -53,7 +53,7 @@ public class ItemDeSeguracaController {
 	}
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PutMapping(path ="/edita/{id}",consumes = "application/json", produces = "application/json")
+	@PutMapping(path ="/edita",consumes = "application/json", produces = "application/json")
 	public ItemDeSegurancaDto edita(@RequestBody ItemDeSegurancaDto editado)  {
 		return service.edita(editado);
 	}

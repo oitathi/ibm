@@ -1,6 +1,5 @@
 package br.com.volks.rota2030.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,7 @@ public class UsuarioDoSistemaController {
 	}
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PutMapping(path ="/edita/{id}",consumes = "application/json", produces = "application/json")
+	@PutMapping(path ="/edita",consumes = "application/json", produces = "application/json")
 	public UsuarioDoSistemaDto edita(@RequestBody UsuarioDoSistemaDto editado)  {
 		return service.edita(editado);
 	}

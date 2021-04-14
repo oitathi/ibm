@@ -46,7 +46,7 @@ public class PerfilDeAcessoDoSistemaService {
 
 	public PerfilDeAcessoDoSistema buscaPorDescricao(String perfil) {
 		try {
-			Optional<PerfilDeAcessoDoSistema> perfilOp=  repository.buscaPerfilETelasPorDescricao(perfil);
+			Optional<PerfilDeAcessoDoSistema> perfilOp=  repository.findByDescricao(perfil);
 			if(perfilOp.isPresent()) {
 				return perfilOp.get();
 			}

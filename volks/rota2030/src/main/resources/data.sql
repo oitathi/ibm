@@ -30,7 +30,64 @@ INSERT INTO ITEM_DE_SEGURANCA(ITEM_DE_SEGURANCA_DESCRICAO,
 							  GRUPO_ID,
 							  TIPO_ID) VALUES('Item Z', 'Norma Z', 	true, 3, 3);
 							  
+INSERT INTO PERFIL_DE_ACESSO_SISTEMA(PERFIL_DE_ACESSO_DESCRICAO) VALUES ('master');
+INSERT INTO PERFIL_DE_ACESSO_SISTEMA(PERFIL_DE_ACESSO_DESCRICAO) VALUES ('admin');
+INSERT INTO PERFIL_DE_ACESSO_SISTEMA(PERFIL_DE_ACESSO_DESCRICAO) VALUES ('user');
 
+INSERT INTO TELA_SISTEMA(TELA_SISTEMA_DESCRICAO) VALUES ('Itens de Seguranca');
+INSERT INTO TELA_SISTEMA(TELA_SISTEMA_DESCRICAO) VALUES ('Parametros de Tecnologia');
+INSERT INTO TELA_SISTEMA(TELA_SISTEMA_DESCRICAO) VALUES ('Usuarios');
 
- 
+INSERT INTO PERFIL_DE_ACESSO_TELA(PERFIL_DE_ACESSO_ID,TELA_SISTEMA_ID) VALUES (1,1);
+INSERT INTO PERFIL_DE_ACESSO_TELA(PERFIL_DE_ACESSO_ID,TELA_SISTEMA_ID) VALUES (1,2);
+INSERT INTO PERFIL_DE_ACESSO_TELA(PERFIL_DE_ACESSO_ID,TELA_SISTEMA_ID) VALUES (1,3);
+INSERT INTO PERFIL_DE_ACESSO_TELA(PERFIL_DE_ACESSO_ID,TELA_SISTEMA_ID) VALUES (2,1);
+INSERT INTO PERFIL_DE_ACESSO_TELA(PERFIL_DE_ACESSO_ID,TELA_SISTEMA_ID) VALUES (2,2);
+INSERT INTO PERFIL_DE_ACESSO_TELA(PERFIL_DE_ACESSO_ID,TELA_SISTEMA_ID) VALUES (3,1);							  
+
+INSERT INTO USUARIO_DO_SISTEMA(USUARIO_DO_SISTEMA_LOGIN,
+                               USUARIO_DO_SISTEMA_NOME,
+                               USUARIO_DO_SISTEMA_EMAIL,
+                               USUARIO_DO_SISTEMA_EXPIRADO,
+                               USUARIO_DO_SISTEMA_ATIVO,
+							   USUARIO_DO_SISTEMA_DATA_ULTIMO_ACESSO,
+							   PERFIL_DE_ACESSO_ID) VALUES
+							   ('master',
+							    'Fulano',
+							    'fulano@teste.com',
+							    false,
+							    true,
+							    {ts '2021-02-17 18:47:52.69'},
+							    1);
+							    
+							    
+INSERT INTO USUARIO_DO_SISTEMA(USUARIO_DO_SISTEMA_LOGIN,
+                               USUARIO_DO_SISTEMA_NOME,
+                               USUARIO_DO_SISTEMA_EMAIL,
+                               USUARIO_DO_SISTEMA_EXPIRADO,
+                               USUARIO_DO_SISTEMA_ATIVO,
+							   USUARIO_DO_SISTEMA_DATA_ULTIMO_ACESSO,
+							   PERFIL_DE_ACESSO_ID) VALUES
+							   ('admin',
+							    'Beltrano',
+							    'beltrano@teste.com',
+							    true,
+							    false,
+							    {ts '2021-01-28 18:47:52.69'},
+							    2);
+							    
+INSERT INTO USUARIO_DO_SISTEMA(USUARIO_DO_SISTEMA_LOGIN,
+                               USUARIO_DO_SISTEMA_NOME,
+                               USUARIO_DO_SISTEMA_EMAIL,
+                               USUARIO_DO_SISTEMA_EXPIRADO,
+                               USUARIO_DO_SISTEMA_ATIVO,
+							   USUARIO_DO_SISTEMA_DATA_ULTIMO_ACESSO,
+							   PERFIL_DE_ACESSO_ID) VALUES
+							   ('user',
+							    'Sicrano',
+							    'sicrano@teste.com',
+							    false,
+							    true,
+							    {ts '2021-04-12 18:47:52.69'},
+							    3); 
 							  

@@ -10,11 +10,11 @@ public class UsuarioDoSistemaDto {
 	private boolean isAcessoExpirado;
 	private boolean isAcessoAtivo;
 	private String dataUltimoAcesso;
-	private String usuario;
+	private String usuarioLogado;
 		
 	
 	
-	public UsuarioDoSistemaDto(long id, String login, String nome, String email, String perfil, boolean isAcessoExpirado, boolean isAcessoAtivo, String dataUltimoAcesso) {
+	public UsuarioDoSistemaDto(long id, String login, String nome, String email, String perfil, boolean isAcessoExpirado, boolean isAcessoAtivo, String dataUltimoAcesso, String usuarioLogado) {
 		this.id = id;
 		this.login = login;
 		this.nome = nome;
@@ -23,8 +23,26 @@ public class UsuarioDoSistemaDto {
 		this.isAcessoExpirado = isAcessoExpirado;
 		this.isAcessoAtivo = isAcessoAtivo;
 		this.dataUltimoAcesso = dataUltimoAcesso;
+		this.usuarioLogado = usuarioLogado;
 		
 	}
+	
+	
+
+
+	public UsuarioDoSistemaDto(long id, String login, String nome, String email, String perfil,
+			boolean isAcessoExpirado, boolean isAcessoAtivo, String dataUltimoAcesso) {
+		this.id = id;
+		this.login = login;
+		this.nome = nome;
+		this.email = email;
+		this.perfil = perfil;
+		this.isAcessoExpirado = isAcessoExpirado;
+		this.isAcessoAtivo = isAcessoAtivo;
+		this.dataUltimoAcesso = dataUltimoAcesso;
+	}
+
+
 
 
 	public long getId() {
@@ -68,10 +86,22 @@ public class UsuarioDoSistemaDto {
 	}
 
 
-	public String getUsuario() {
-		return usuario;
+	public String getUsuarioLogado() {
+		return usuarioLogado;
 	}
 
+
+
+
+	@Override
+	public String toString() {
+		return "UsuarioDoSistemaDto [id=" + id + ", login=" + login + ", nome=" + nome + ", email=" + email
+				+ ", perfil=" + perfil + ", isAcessoExpirado=" + isAcessoExpirado + ", isAcessoAtivo=" + isAcessoAtivo
+				+ ", dataUltimoAcesso=" + dataUltimoAcesso +"]";
+	}
+
+
+	
 	
 
 	

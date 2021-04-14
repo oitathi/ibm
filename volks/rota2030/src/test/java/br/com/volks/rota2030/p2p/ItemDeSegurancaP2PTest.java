@@ -17,9 +17,6 @@ import br.com.volks.rota2030.controller.ItemDeSeguracaController;
 import br.com.volks.rota2030.dto.ItemDeSegurancaDto;
 import br.com.volks.rota2030.form.ItemDeSegurancaForm;
 
-
-
-
 @TestMethodOrder(OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = ("spring.h2.console.enabled=true"))
 public class ItemDeSegurancaP2PTest {

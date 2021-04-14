@@ -50,12 +50,22 @@ public class UsuarioDoSistemaRepositoryImpl implements UsuarioDoSistemaRepositor
 		    			predicate = cb.and(cb.equal(usuario.get("login"), entry.getValue()));
 		    			break;
 		    			
+			    	case"nome":
+		    			predicate = cb.and(cb.equal(usuario.get("nome"), entry.getValue()));
+		    			break;
+		    			
 			    	case"email":
 		    			predicate = cb.and(cb.equal(usuario.get("email"), entry.getValue()));
 		    			break;
 		    			
 			    	case"acessoExpirado":
-		    			predicate = cb.and(cb.equal(usuario.get("isAcessoExpirado"), entry.getValue()));
+			    		boolean opcaoExpirado = entry.getValue().equalsIgnoreCase("true")?true:false;
+		    			predicate = cb.and(cb.equal(usuario.get("isAcessoExpirado"), opcaoExpirado));
+		    			break;
+		    			
+			    	case"acessoAtivo":
+			    		boolean opcaoAtivo = entry.getValue().equalsIgnoreCase("true")?true:false;
+		    			predicate = cb.and(cb.equal(usuario.get("isAcessoAtivo"), opcaoAtivo));
 		    			break;
 		    			
 			    	case"perfil":

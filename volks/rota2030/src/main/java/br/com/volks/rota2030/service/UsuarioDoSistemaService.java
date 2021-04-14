@@ -28,6 +28,7 @@ import br.com.volks.rota2030.model.Logs;
 import br.com.volks.rota2030.model.UsuarioDoSistema;
 import br.com.volks.rota2030.repository.LogsRepository;
 import br.com.volks.rota2030.repository.UsuarioDoSistemaRepository;
+import br.com.volks.rota2030.util.DateOperations;
 
 @Service
 public class UsuarioDoSistemaService {
@@ -95,8 +96,8 @@ public class UsuarioDoSistemaService {
 	public UsuarioDoSistemaDto edita(UsuarioDoSistemaDto dto) {
 		try {
 			
-			usuarioRepository.update(dto.getId(), dto.getEmail(), dto.isAcessoExpirado(),  dto.isAcessoAtivo(), dto.getDataUltimoAcesso(), dto.getPerfil());
-			Logs log = new Logs(dto.getUsuario(), AcoesEnum.EDITAR, TabelasEnum.USUARIO, dto.getId(), dto.toString(), new Date());
+			usuarioRepository.update(dto.getId(), dto.getNome(), dto.getEmail(), dto.isAcessoExpirado(),  dto.isAcessoAtivo(), DateOperations.toDate(dto.getDataUltimoAcesso()), dto.getPerfil());
+			Logs log = new Logs(dto.getUsuarioLogado(), AcoesEnum.EDITAR, TabelasEnum.USUARIO, dto.getId(), dto.toString(), new Date());
 			logsRepository.save(log);
 			
 			return dto;

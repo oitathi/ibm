@@ -11,6 +11,8 @@ import br.com.volks.rota2030.model.PerfilDeAcessoDoSistema;
 
 public interface PerfilDeAcessoDoSistemaRepository extends JpaRepository<PerfilDeAcessoDoSistema, Long>, PagingAndSortingRepository<PerfilDeAcessoDoSistema, Long>{  
 
+	Optional<PerfilDeAcessoDoSistema> findByDescricao(String descricao);
+	
 	@Query("SELECT p FROM PerfilDeAcessoDoSistema p JOIN p.telas t ON p.id = t.id WHERE p.descricao = ?1")
 	Optional<PerfilDeAcessoDoSistema> buscaPerfilETelasPorDescricao(String descricao);
 	

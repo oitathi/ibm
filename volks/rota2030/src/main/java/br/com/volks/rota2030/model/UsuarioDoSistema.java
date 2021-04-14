@@ -47,7 +47,7 @@ public class UsuarioDoSistema  {
 	@Column(name = "USUARIO_DO_SISTEMA_ATIVO")
 	private boolean isAcessoAtivo;
 
-	@Column(name = "UUSUARIO_DO_SISTEMA_DATA_ULTIMO_ACESSO")
+	@Column(name = "USUARIO_DO_SISTEMA_DATA_ULTIMO_ACESSO")
 	private Date dataUltimoAcesso;
 
 	
@@ -68,6 +68,7 @@ public class UsuarioDoSistema  {
 		this.perfil = perfil;
 		
 		//sempre q salva um novo usuario
+		this.dataUltimoAcesso = new Date();
 		this.isAcessoExpirado = false;
 		this.isAcessoAtivo = true;
 	}

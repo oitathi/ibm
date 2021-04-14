@@ -23,6 +23,20 @@ public class UsuarioDoSistemaForm {
 	
 	private boolean isAcessoAtivo;
 	
+	
+	
+	public UsuarioDoSistemaForm( String login,String email, String nome,String perfil,String usuarioLogado, boolean isAcessoExpirado,
+			boolean isAcessoAtivo) {
+		
+		this.login = login;
+		this.email = email;
+		this.nome = nome;
+		this.perfil = perfil;
+		this.usuarioLogado = usuarioLogado;
+		this.isAcessoExpirado = isAcessoExpirado;
+		this.isAcessoAtivo = isAcessoAtivo;
+	}
+
 	public String getLogin() {
 		return login;
 	}
@@ -41,6 +55,14 @@ public class UsuarioDoSistemaForm {
 
 	public String getUsuarioLogado() {
 		return usuarioLogado;
+	}
+
+	public boolean isAcessoExpirado() {
+		return isAcessoExpirado;
+	}
+
+	public boolean isAcessoAtivo() {
+		return isAcessoAtivo;
 	}
 	
 	

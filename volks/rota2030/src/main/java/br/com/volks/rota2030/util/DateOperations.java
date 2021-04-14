@@ -1,6 +1,7 @@
 package br.com.volks.rota2030.util;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,5 +27,10 @@ public class DateOperations {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
         return dateFormat.format(date);  
     }
+	
+	public static Date toDate(String dateInString) throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		 return formatter.parse(dateInString);
+	}
 
 }

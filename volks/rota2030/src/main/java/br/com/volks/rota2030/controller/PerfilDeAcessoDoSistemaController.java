@@ -48,7 +48,7 @@ public class PerfilDeAcessoDoSistemaController {
 	}
 	
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	@PutMapping(path ="/edita/{id}",consumes = "application/json", produces = "application/json")
+	@PutMapping(path ="/edita",consumes = "application/json", produces = "application/json")
 	public PerfilDeAcessoDoSistemaDto edita(@RequestBody PerfilDeAcessoDoSistemaDto editado)  {
 		return service.edita(editado);
 	}
